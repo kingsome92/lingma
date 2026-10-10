@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>芙崽 Fuzozo × 小乐功能对比</title>
+  <style>
+    :root { color-scheme: light; --ink:#202124; --muted:#68707d; --line:#dfe3e8; --soft:#f5f7f9; --accent:#315c8c; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:#fff; color:var(--ink); font:15px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+    main { max-width:1440px; margin:0 auto; padding:42px 32px 64px; }
+    h1 { margin:0 0 6px; font-size:30px; line-height:1.25; letter-spacing:0; }
+    h2 { margin:30px 0 10px; font-size:20px; line-height:1.35; }
+    .subtle, .note { color:var(--muted); }
+    .stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:28px 0 32px; }
+    .stat { border:1px solid var(--line); padding:16px 18px; background:var(--soft); }
+    .stat strong { display:block; color:var(--accent); font-size:28px; line-height:1.1; }
+    .stat span { color:var(--muted); font-size:13px; }
+    .intro { max-width:1000px; }
+    hr { border:0; border-top:1px solid var(--line); margin:30px 0; }
+    .table-wrap { overflow:auto; border:1px solid var(--line); }
+    table { width:100%; min-width:1120px; border-collapse:collapse; table-layout:fixed; }
+    th, td { padding:12px 13px; vertical-align:top; text-align:left; border-bottom:1px solid var(--line); }
+    th { position:sticky; top:0; background:#eef2f6; color:#27384d; font-weight:650; }
+    tr:last-child td { border-bottom:0; }
+    th:nth-child(1), td:nth-child(1) { width:12%; font-weight:650; }
+    th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) { width:19%; }
+    th:nth-child(4), td:nth-child(4) { width:12%; color:var(--accent); font-weight:650; }
+    th:nth-child(5), td:nth-child(5) { width:28%; }
+    .strategy p { margin:8px 0; }
+    .note { margin:24px 0 0; font-size:13px; }
+    @media (max-width:720px) { main { padding:28px 16px 48px; } h1 { font-size:24px; } .stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>芙崽 Fuzozo × 小乐功能对比</h1>
+  <p class="subtle">产品经理视角｜基于芙崽功能清单与《小乐使用手册总稿 V7》整理</p>
+
+  <section class="stats" aria-label="概览数据">
+    <div class="stat"><strong>31</strong><span>芙崽功能条目</span></div>
+    <div class="stat"><strong>8</strong><span>小乐手册核心模块</span></div>
+    <div class="stat"><strong>4</strong><span>小乐成长数据类型</span></div>
+    <div class="stat"><strong>2</strong><span>主要产品路线</span></div>
+  </section>
+
+  <section class="intro">
+    <h2>一句话判断</h2>
+    <p>芙崽的竞争力来自“拟真情感 + 个性人格 + 设备社交 + 随行潮玩”，小乐的竞争力来自“儿童陪伴 + 家长可视化 + 目标提醒 + 家庭教育服务”。两者不是简单的功能替代关系，而是情感潮玩路线与家庭教育路线的竞争。</p>
+    <p>若争夺同一家庭用户，小乐需要补强即时情绪回应、身体互动、人设记忆和可迁移性；芙崽若进入儿童家庭场景，则需要补齐家长控制、成长目标、作息提醒、内容安全、测评与报告。</p>
+  </section>
+
+  <hr>
+  <h2>功能对比</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>比较维度</th><th>芙崽 Fuzozo</th><th>小乐</th><th>判断</th><th>产品经理解读</th></tr></thead>
+    <tbody>
+      <tr><td>产品定位</td><td>AI 情感潮玩 / 社交型数字生命</td><td>AI 养娃陪伴 / 家庭教育闭环</td><td>定位不同</td><td>芙崽偏“被养成的伙伴”，小乐偏“帮助孩子成长的工具+伙伴”</td></tr>
+      <tr><td>核心对话</td><td>地球语；另有毛毛语模式</td><td>语音唤醒、连续对话、可打断；支持多语言交互</td><td>重叠</td><td>芙崽强调角色语言与人设，小乐强调稳定可用和家庭场景</td></tr>
+      <tr><td>长期记忆</td><td>EchoChain 仿生记忆；持续对话自动积累</td><td>聊天记录永久保存；提供摘要、关键词、AI 分析</td><td>各有侧重</td><td>芙崽更像“记住你”，小乐更像“让家长看见孩子”</td></tr>
+      <tr><td>情绪理解</td><td>实时识别情绪并主动安抚、打气或辅助决策</td><td>情绪记录、趋势、月度占比、极端情绪预警和行动建议</td><td>各有侧重</td><td>芙崽强在实时回应，小乐强在事后观察与家长建议</td></tr>
+      <tr><td>多模态硬件互动</td><td>震动、自然体温、撸毛、额头/下巴分区触摸、摇晃反馈</td><td>眼睛屏幕表情；耳朵按键唤醒/打断；语音反馈</td><td>芙崽优势</td><td>芙崽的身体反馈是核心差异，小乐当前手册未提及同类能力</td></tr>
+      <tr><td>声纹与主人识别</td><td>支持录入声纹，多人对话识别主人</td><td>手册未提及声纹识别</td><td>芙崽优势</td><td>适合多人家庭；小乐需核实是否有同类能力或规划</td></tr>
+      <tr><td>人格养成</td><td>MBTI 初始设定；互动形成二次性格；可迁移性格/记忆</td><td>孩子闪光点勋章、成长报告六维发展观察</td><td>各有侧重</td><td>芙崽是“人格被养成”，小乐是“能力被记录与引导”</td></tr>
+      <tr><td>成长反馈</td><td>心情日记；养成系周报解读性格变化</td><td>日报/周报/月报、成长亮点、重点关注、行动建议，支持分享</td><td>小乐优势</td><td>小乐的报告更完整，且直接服务家长决策</td></tr>
+      <tr><td>目标与习惯</td><td>表格未列独立目标/习惯任务</td><td>一次性/周期性目标、提醒、家长或孩子语音标记完成</td><td>小乐优势</td><td>这是小乐的“养娃”核心闭环，芙崽可考虑轻量任务化</td></tr>
+      <tr><td>日常提醒</td><td>表格未列闹钟、语音留言、睡眠提醒</td><td>闹钟、定时语音留言、21:00-24:00 睡眠提醒、使用时长提醒</td><td>小乐优势</td><td>小乐更适合家庭作息管理</td></tr>
+      <tr><td>内容安全</td><td>资料强调拟真反馈与防滥用，但未列家长内容策略</td><td>家长可配置话题拦截，并查看命中次数和聊天记录</td><td>小乐优势</td><td>儿童产品需补充分龄策略、家长控制和审计机制对比</td></tr>
+      <tr><td>故事/内容</td><td>表格未列内容资源体系</td><td>音乐、故事、睡前故事会、动画/故事内容；音频播放需 WiFi</td><td>小乐优势</td><td>小乐已有内容生态，但家长端暂不支持直接推送故事/儿歌</td></tr>
+      <tr><td>专家与测评</td><td>表格未列</td><td>AI 家庭教育咨询、专家数字人、AI 场景模拟、六类专业测评</td><td>小乐优势</td><td>小乐从硬件延伸到家庭教育服务</td></tr>
+      <tr><td>家长社区</td><td>芙崽社交围绕崽崽号、附近的崽、碰一碰交友、传纸条</td><td>家长圈支持图文/视频发布、评论、点赞、回复、转发</td><td>场景不同</td><td>芙崽服务年轻用户社交，小乐服务家长经验交流</td></tr>
+      <tr><td>社交门槛</td><td>碰一碰、搜索 ID、LBS 发现附近设备</td><td>家长圈线上互动</td><td>芙崽优势</td><td>芙崽把设备变成社交入口；需重点评估儿童隐私与陌生人风险</td></tr>
+      <tr><td>联网方式</td><td>随行版内置 4G、开机即用；WiFi 版需 2.4G 配网</td><td>WiFi + 4G；每月 300M 4G，音乐/故事需 WiFi</td><td>芙崽优势</td><td>芙崽随行体验更直接；小乐的 4G 规则更明确</td></tr>
+      <tr><td>续航</td><td>随行版连续对话 5-8h、综合 6-8h、待机 48h+；WiFi 版待机 10 天+</td><td>手册未给出续航时长，提供电量查看和 Type-C 充电</td><td>芙崽优势</td><td>小乐需要补齐可对外比较的续航口径</td></tr>
+      <tr><td>使用限制/商业化</td><td>聊天每分钟消耗 5 点精力；普通版 120 点上限，自动恢复</td><td>手册未提精力值或按时长付费限制</td><td>芙崽模式更明确</td><td>芙崽用资源值控制成本与回访，小乐更偏硬件+内容/服务生态</td></tr>
+      <tr><td>外观与配件</td><td>换装配件自由造型，配件另购</td><td>毛绒玩偶本体；手册未列换装体系</td><td>芙崽优势</td><td>芙崽更适合潮玩收藏和配件复购</td></tr>
+      <tr><td>数据迁移</td><td>同属性芙崽可迁移，换机保留性格/记忆</td><td>支持绑定多台小乐和切换设备；未提成长数据迁移</td><td>芙崽优势</td><td>小乐需明确换机、家庭成员和多设备数据继承规则</td></tr>
+    </tbody>
+  </table></div>
+
+  <hr>
+  <section class="strategy">
+    <h2>产品策略启示</h2>
+    <p><strong>小乐优先补强：</strong>1）把情绪识别从家长端的“记录/报告”前移到设备端的实时回应；2）增加触摸、拥抱、震动、温度等低门槛身体互动；3）建立“长期记忆—人格变化—成长报告”的统一数据模型；4）明确换机与多设备的数据继承。</p>
+    <p><strong>芙崽进入儿童场景前需补齐：</strong>1）家长控制、内容拦截和风险审计；2）目标/习惯/作息提醒；3）儿童分龄内容与教育专业性；4）家长可读的成长解释，而不是只展示人格变化。</p>
+    <p><strong>双方都应核验：</strong>声纹识别准确率、情绪识别误报/漏报、记忆可删除与导出、陌生人社交保护、未成年人数据合规，以及联网中断时的核心功能可用性。</p>
+  </section>
+  <p class="note">口径说明：表格中的“手册未提及”不等同于功能不存在，仅表示在当前附件资料中没有找到明确描述。来源：小乐使用手册总稿 V7（62 页）；芙崽 Fuzozo 功能清单（sheet=bfd9d2）。</p>
+</main>
+</body>
+</html>

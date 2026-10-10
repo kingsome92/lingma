@@ -1,0 +1,6 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/jyx0ra1s","index":3,"layout":{"id":"ly/p83mt83u","name":"标题和内容"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/5cva1cfq","kind":"textbox","name":"标题 1","position":{"left":88,"top":38.33,"width":1104,"height":139.17},"text":"1.1 冷启动优化：关键场景均明显提速","style":{"fontSize":58.67,"typeface":"Arial","color":"#000000","alignment":"left"}},
+{"id":"ch/2t03u5wf","kind":"chart","position":{"left":105,"top":185,"width":1040,"height":385},"chartType":"bar"},
+{"id":"sh/jadsz2xk","kind":"textbox","position":{"left":135,"top":592,"width":1010,"height":38},"text":"WiFi开机对话由30秒降至15秒，提速50%；4G深睡唤醒由20秒降至15秒，提速25%","style":{"fontSize":18,"typeface":"Arial","color":"#166534","bold":true,"alignment":"center"},"geometry":"rect","lineWidth":0}
+]}

@@ -1,0 +1,6 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/hxeqew","index":8,"layout":{"id":"ly/p83mt83u","name":"标题和内容"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/x4fi9432","kind":"textbox","name":"标题 1","position":{"left":88,"top":38.33,"width":1104,"height":139.17},"text":"4. 版本管理与发版","style":{"fontSize":58.67,"typeface":"Arial","color":"#000000","alignment":"left"}},
+{"id":"tb/d4ba9o3m","kind":"table","position":{"left":88,"top":205,"width":1104,"height":345},"text":"固件版本\t测试\t验收\t灰度\t全量发布\t公告传达\n4.8.6\t完成\t完成\t完成\t完成\t完成\n4.8.8\t完成\t完成\t完成\t完成\t完成\n4.9.1\t完成\t完成\t完成\t完成\t完成\n4.9.6\t完成\t完成\t完成\t完成\t完成","rows":5,"cols":6},
+{"id":"sh/j6h0bel8","kind":"textbox","position":{"left":120,"top":585,"width":1040,"height":42},"text":"4个版本均完成测试、验收、灰度、全量发布及版本公告闭环","style":{"fontSize":20,"typeface":"Arial","color":"#166534","bold":true,"alignment":"center"},"geometry":"rect","lineWidth":0}
+]}

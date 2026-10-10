@@ -1,0 +1,5 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/ofy9wn61","index":2,"layout":{"id":"ly/p83mt83u","name":"标题和内容"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/m5cra54z","kind":"textbox","name":"标题 1","position":{"left":88,"top":38.33,"width":1104,"height":139.17},"text":"1. 核心终端功能上线","style":{"fontSize":58.67,"typeface":"Arial","color":"#000000","alignment":"left"}},
+{"id":"tb/u5o7algj","kind":"table","position":{"left":88,"top":185,"width":1104,"height":450},"text":"方向\t上线内容\t用户价值\n内容资源\t接入贝瓦上万首曲库资源\t扩充儿童音频内容供给\n联网能力\t支持时政新闻、百科、天气查询\t提升实时信息获取能力\n连接稳定性\t弱网提示、自动重连、程序看门狗\t降低断网与程序异常影响\n主动交互\t开机沉默至浅睡眠前5分钟自动攀谈\t减少冷场，增强陪伴感\n版本交付\t4.8.6、4.8.8、4.9.1、4.9.6\t完成测试、验收、灰度与全量发布","rows":6,"cols":3}
+]}

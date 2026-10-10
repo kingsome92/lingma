@@ -1,0 +1,5 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/y90nupkv","index":0,"layout":{"id":"ly/ux4ruhcv","name":"标题幻灯片"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/547294r6","kind":"textbox","name":"标题 1","position":{"left":160,"top":117.83,"width":960,"height":250.67},"text":"季度工作汇报\n2026年9月","style":{"fontSize":53.33,"typeface":"Arial","color":"#000000","alignment":"center"}},
+{"id":"sh/k3yl0zql","kind":"textbox","name":"副标题 2","position":{"left":151.02,"top":571.26,"width":960,"height":64.56},"text":"养娃乐教育科技","style":{"fontSize":32,"typeface":"Arial","color":"#000000","alignment":"center"}}
+]}

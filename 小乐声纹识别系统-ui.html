@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小乐声纹识别系统 · UI 视觉稿</title>
+<style>
+:root {
+  --bg: #EEF2F0;
+  --surface: #FFFFFF;
+  --ink: #182630;
+  --ink-2: #33434C;
+  --muted: #5F6F78;
+  --faint: #8A9A9F;
+  --line: #DFE7E3;
+  --line-2: #E7EDE9;
+  --primary: #12A878;
+  --primary-deep: #0E9166;
+  --primary-soft: #E1F5ED;
+  --coral: #FF7A5C;
+  --coral-soft: #FFEDE7;
+  --amber: #F2B544;
+  --amber-soft: #FFF5DE;
+  --sky: #4C9EEB;
+  --sky-soft: #E8F2FC;
+  --danger: #E5484D;
+  --danger-soft: #FDECEC;
+  --success: #25A879;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  background: linear-gradient(180deg, #F8FAF9 0%, var(--bg) 100%);
+  color: var(--ink);
+  letter-spacing: 0;
+}
+button, input { font-family: inherit; letter-spacing: 0; }
+.hidden { display: none !important; }
+
+.app-shell { max-width: 1480px; margin: 0 auto; padding: 20px 24px 44px; }
+.top-header { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 6px 4px 16px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  width: 46px; height: 46px; border-radius: 8px; background: linear-gradient(135deg, #12A878, #1D9CBE);
+  color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;
+  box-shadow: 0 8px 18px rgba(18, 168, 120, .28);
+}
+.brand h1 { margin: 0; font-size: 20px; font-weight: 800; }
+.brand p { margin: 3px 0 0; font-size: 12.5px; color: var(--muted); }
+.header-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto; }
+.pill {
+  background: var(--surface); border: 1px solid var(--line); color: var(--muted);
+  font-size: 12px; padding: 6px 11px; border-radius: 8px; white-space: nowrap;
+}
+.pill strong { color: var(--ink); }
+
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.tab-btn {
+  appearance: none; border: 1px solid #D8E2DD; background: var(--surface); color: #4C5B63;
+  font: inherit; font-size: 13.5px; padding: 9px 15px; border-radius: 8px; cursor: pointer;
+}
+.tab-btn:hover { border-color: #A8C4B8; }
+.tab-btn.active { background: var(--ink); border-color: var(--ink); color: #FFF; font-weight: 600; }
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+
+.showcase { display: grid; grid-template-columns: minmax(460px, 1fr) 360px; gap: 20px; align-items: start; }
+.preview-stage {
+  background: #F4F8F6; border: 1px solid #DCE6E1; border-radius: 8px; padding: 26px 16px;
+  display: flex; justify-content: center; min-height: 860px; position: relative;
+}
+.preview-stage::before {
+  content: "小程序端 · 390 × 812"; position: absolute; top: 10px; left: 14px;
+  font-size: 11px; color: #93A49D; letter-spacing: 0;
+}
+.phone {
+  width: 390px; height: 812px; background: #0B0F12; padding: 9px; border-radius: 44px;
+  box-shadow: 0 24px 60px rgba(24, 38, 48, .28), inset 0 0 0 1px rgba(255, 255, 255, .55);
+}
+.screen { position: relative; width: 100%; height: 100%; background: #F5F7F6; border-radius: 36px; overflow: hidden; }
+.notch {
+  position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 104px; height: 22px;
+  background: #0B0F12; border-radius: 12px; z-index: 30; pointer-events: none;
+}
+.statusbar {
+  position: relative; height: 38px; z-index: 20; display: flex; justify-content: space-between;
+  align-items: center; padding: 0 24px; font-size: 12px; font-weight: 700; color: var(--ink);
+  background: #FBFCFB;
+}
+.statusbar svg { display: block; }
+.status-right { display: flex; align-items: center; gap: 5px; }
+
+.page { position: absolute; top: 38px; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; background: #F5F7F6; }
+.page-scroll { flex: 1; overflow-y: auto; padding: 14px 18px 24px; }
+.page-scroll::-webkit-scrollbar { width: 0; }
+
+.topbar {
+  display: flex; align-items: center; gap: 8px; height: 58px; padding: 0 12px; flex: none;
+  background: var(--surface); border-bottom: 1px solid var(--line-2);
+}
+.topbar .title { flex: 1; text-align: center; font-size: 16.5px; font-weight: 800; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topbar .side { width: 40px; flex: none; display: flex; align-items: center; justify-content: center; }
+.topbar .side.right { justify-content: flex-end; }
+.step-pill {
+  font-size: 11px; font-weight: 700; color: var(--primary-deep); background: var(--primary-soft);
+  border-radius: 20px; padding: 4px 9px; white-space: nowrap;
+}
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 8px; border: 0; background: transparent; color: #465760;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex: none;
+}
+.icon-btn:hover { background: #F0F5F2; }
+
+.btn {
+  appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 0 18px; border-radius: 8px; font-size: 15px; font-weight: 700;
+  border: 1px solid transparent; cursor: pointer; transition: background .15s ease, border-color .15s ease;
+}
+.btn-primary { background: var(--primary); color: #FFF; width: 100%; box-shadow: 0 8px 18px rgba(18, 168, 120, .22); }
+.btn-primary:hover:not(:disabled) { background: var(--primary-deep); }
+.btn-primary:disabled { background: #B9CFC7; color: #F0F7F5; box-shadow: none; cursor: not-allowed; }
+.btn-secondary { background: var(--surface); color: var(--ink-2); border-color: #D5E0DB; width: 100%; }
+.btn-secondary:hover { border-color: #9FBDB1; }
+.btn-danger { background: var(--danger); color: #FFF; width: 100%; }
+.btn-ghost {
+  appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 0 13px; border-radius: 8px; border: 1px solid #BDE5D8; background: transparent;
+  color: var(--primary-deep); font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.btn.small { height: 36px; font-size: 13px; padding: 0 14px; width: auto; }
+
+.bottom-bar { flex: none; padding: 12px 18px 15px; background: var(--surface); border-top: 1px solid var(--line-2); }
+.security-banner {
+  margin: 12px 18px 0; display: flex; align-items: center; gap: 8px;
+  background: var(--primary-soft); color: #0B6B4F; border: 1px solid #C4EBDD; border-radius: 8px;
+  padding: 10px 12px; font-size: 12.5px; font-weight: 600;
+}
+
+.section-block { margin-top: 18px; }
+.section-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.section-title { font-size: 14px; font-weight: 800; color: #26343D; }
+.section-count { font-size: 11px; color: var(--faint); background: #EDF2EF; border-radius: 20px; padding: 2px 8px; }
+
+.member-card {
+  display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 8px; padding: 13px 14px; margin-bottom: 10px;
+}
+.avatar {
+  width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--avatar-bg, #EFF3F2); color: var(--avatar-fg, #6C7A7A); flex: none;
+}
+.avatar svg { width: 26px; height: 26px; }
+.avatar.lg { width: 56px; height: 56px; }
+.avatar.lg svg { width: 34px; height: 34px; }
+.member-info { flex: 1; min-width: 0; }
+.member-line { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 800; }
+.role-tag { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+.role-tag.child { background: #FFE8DC; color: #D95F34; }
+.role-tag.adult { background: #E4F1FC; color: #2B74AD; }
+.member-meta { font-size: 12px; color: #7C8B92; margin-top: 4px; }
+.status-pill {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: #0E8A61;
+  background: #E4F6EE; border-radius: 20px; padding: 4px 9px; white-space: nowrap;
+}
+.visitor-row {
+  display: flex; align-items: center; gap: 10px; background: #F0F5F3; border: 1px dashed #C9DAD2;
+  border-radius: 8px; padding: 12px 14px; margin-top: 18px; font-size: 12.5px; color: #51626B; cursor: pointer;
+}
+.visitor-row .link { color: var(--primary-deep); margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-weight: 700; }
+
+.step-indicator { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.step-indicator .step-item { flex: 1; display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--faint); }
+.step-indicator .step-item.active { color: var(--primary-deep); font-weight: 800; }
+.step-dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #CBD8D2; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
+.step-indicator .step-item.active .step-dot { background: var(--primary); border-color: var(--primary); color: #FFF; }
+.step-line { flex: 1; height: 1.5px; background: #D9E3DE; }
+.step-line.active { background: var(--primary); }
+
+.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.role-card {
+  background: var(--surface); border: 1.5px solid #DCE5E0; border-radius: 8px; padding: 16px 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: border-color .15s ease;
+}
+.role-card b { font-size: 14.5px; color: var(--ink-2); }
+.role-card span { font-size: 11.5px; color: #839299; }
+.role-card.active { border-color: var(--primary); background: #F3FBF8; box-shadow: 0 0 0 3px rgba(18, 168, 120, .12); }
+.role-card.active b { color: var(--primary-deep); }
+
+.field { margin-top: 16px; }
+.field label { display: flex; gap: 4px; font-size: 13px; font-weight: 800; color: #2C3B44; margin-bottom: 8px; }
+.field .required { color: var(--danger); }
+.field input {
+  width: 100%; height: 46px; border: 1px solid #D5E0DB; border-radius: 8px; padding: 0 14px;
+  font-size: 14px; color: var(--ink); background: var(--surface);
+}
+.field input:focus { outline: 2px solid rgba(18, 168, 120, .22); border-color: var(--primary); }
+.field-help { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11.5px; color: var(--faint); }
+.error-text { margin-top: 12px; color: #C93036; font-size: 12.5px; background: var(--danger-soft); border: 1px solid #F5C9CB; border-radius: 8px; padding: 9px 11px; display: flex; gap: 7px; align-items: center; }
+
+.chip-group { display: flex; gap: 8px; }
+.chip-choice {
+  flex: 1; height: 38px; border: 1px solid #D5E0DB; background: var(--surface); border-radius: 8px;
+  font-size: 13px; color: #4A5A63; cursor: pointer;
+}
+.chip-choice.active { border-color: var(--primary); background: var(--primary-soft); color: var(--primary-deep); font-weight: 800; }
+
+.connect-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin-top: 10px; }
+.check-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #33434C; font-weight: 600; cursor: pointer; }
+.check-row input { width: 18px; height: 18px; accent-color: var(--primary); margin: 0; flex: none; }
+.env-row {
+  display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; background: #F6F9F7;
+  border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #5C6D76; line-height: 1.6;
+}
+.env-row svg { flex: none; margin-top: 1px; }
+.device-status {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 12px; color: #2C3B44;
+  font-weight: 700; background: #EDF4F1; padding: 6px 10px; border-radius: 20px;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.dot.online { background: #2CB77F; box-shadow: 0 0 0 3px rgba(44, 183, 127, .15); }
+.dot.offline { background: #A6B3AD; box-shadow: 0 0 0 3px rgba(166, 179, 173, .15); }
+.device-status.offline { background: #F0F2F1; color: #7A898F; }
+
+.enroll-target { font-size: 13.5px; color: var(--muted); margin-bottom: 12px; }
+.enroll-target b { color: var(--ink); }
+.guide-card { background: linear-gradient(135deg, #FFF6EF, #FFF1E8); border: 1px solid #F6D9C9; border-radius: 8px; padding: 16px; }
+.guide-label { font-size: 11.5px; color: #B0764F; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.guide-card p { font-size: 16px; font-weight: 800; color: #6B3F24; line-height: 1.65; margin: 0 0 12px; }
+.progress-card { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+.progress-head { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
+.progress-head b { color: var(--primary-deep); font-size: 14px; }
+.progress-track { height: 10px; background: #E9F0EC; border-radius: 8px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #12A878, #34C08A); border-radius: 8px; width: 0; transition: width .2s linear; }
+.record-status { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 12.5px; color: #43535C; font-weight: 600; }
+.rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: pulse 1.1s infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+.warning-banner { margin-top: 14px; background: var(--amber-soft); border: 1px solid #F2C98F; border-radius: 8px; padding: 12px; }
+.warn-title { display: flex; gap: 8px; color: #9A5B12; font-size: 12.5px; font-weight: 800; align-items: center; }
+.warn-sub { font-size: 11.5px; color: #A56A2A; margin: 6px 0 10px 26px; }
+.warning-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-left: 26px; }
+
+.result { height: 100%; display: flex; flex-direction: column; align-items: center; padding: 22px 22px 24px; overflow-y: auto; background: #FBFCFB; }
+.result-icon { width: 78px; height: 78px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 26px; }
+.result-icon.success { background: #E4F6EE; color: var(--success); box-shadow: 0 10px 24px rgba(37, 168, 121, .18); }
+.result-icon.fail { background: var(--danger-soft); color: var(--danger); box-shadow: 0 10px 24px rgba(229, 72, 77, .14); }
+.result h1 { margin: 18px 0 4px; font-size: 22px; font-weight: 800; }
+.result-sub { color: var(--faint); font-size: 13px; }
+.result-card {
+  width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 18px 16px; margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.result-card .profile { display: flex; align-items: center; gap: 12px; width: 100%; }
+.result-card .profile b { font-size: 15px; display: block; }
+.result-card .profile span { font-size: 12px; color: var(--faint); }
+.secure-line {
+  display: flex; gap: 6px; color: #0E8A61; background: #E4F6EE; font-size: 11.5px; font-weight: 700;
+  padding: 9px 10px; border-radius: 8px; width: 100%; justify-content: center; align-items: center;
+}
+.tip-banner {
+  width: 100%; display: flex; gap: 8px; align-items: center; background: var(--sky-soft); border: 1px solid #D3E6F8;
+  color: #2B6FA3; font-size: 12px; padding: 10px 12px; border-radius: 8px; margin-top: 14px; line-height: 1.55;
+}
+.result .btn { margin-top: 16px; }
+.fail-reasons { width: 100%; margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+.fail-reason { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 11px 13px; font-size: 12.5px; color: var(--ink-2); }
+.fail-reason .icon { width: 28px; height: 28px; border-radius: 8px; background: var(--danger-soft); color: var(--danger); display: flex; align-items: center; justify-content: center; flex: none; }
+
+.modal-backdrop {
+  position: absolute; inset: 0; background: rgba(18, 28, 34, .46); display: flex; align-items: center;
+  justify-content: center; z-index: 60; padding: 22px;
+}
+.modal-card { background: var(--surface); border-radius: 8px; padding: 20px; width: 100%; box-shadow: 0 22px 50px rgba(18, 28, 34, .28); }
+.modal-icon { width: 46px; height: 46px; border-radius: 50%; background: var(--danger-soft); color: var(--danger); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+.modal-card h2 { margin: 0 0 6px; font-size: 18px; font-weight: 800; text-align: center; }
+.modal-card .modal-desc { margin: 0 0 14px; text-align: center; font-size: 13px; color: var(--muted); }
+.modal-card ul { margin: 0 0 18px; padding: 0; list-style: none; background: #F7FAF8; border: 1px solid #E6EDE9; border-radius: 8px; padding: 6px 12px; }
+.modal-card li { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: #465760; line-height: 1.55; padding: 7px 0; border-bottom: 1px dashed #E2E9E5; }
+.modal-card li:last-child { border-bottom: 0; }
+.modal-card li svg { flex: none; margin-top: 2px; color: var(--faint); }
+.modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.bottom-sheet { background: var(--surface); border-radius: 8px 8px 0 0; padding: 10px 20px 22px; width: 100%; }
+.sheet-handle { width: 36px; height: 4px; background: #D9E2DD; border-radius: 2px; margin: 8px auto 14px; }
+.bottom-sheet h3 { margin: 0 0 8px; font-size: 17px; font-weight: 800; }
+.bottom-sheet p { margin: 0 0 12px; font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+.bottom-sheet ul { margin: 0 0 16px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.bottom-sheet li { display: flex; gap: 8px; font-size: 12.5px; color: var(--ink-2); line-height: 1.6; }
+.bottom-sheet li svg { flex: none; margin-top: 2px; color: var(--primary); }
+
+.toast {
+  position: absolute; bottom: 24px; left: 16px; right: 16px; z-index: 70; background: #1E2C33; color: #FFF;
+  border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; font-size: 13px;
+  box-shadow: 0 14px 30px rgba(18, 28, 34, .3);
+}
+.toast button { margin-left: auto; background: transparent; border: 0; color: #7FE0BC; font-size: 13px; font-weight: 800; cursor: pointer; padding: 2px 4px; }
+
+.side-panel { background: var(--surface); border: 1px solid #DFE7E3; border-radius: 8px; padding: 18px; }
+.panel-title { font-size: 14px; font-weight: 800; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.panel-title svg { color: var(--primary); }
+.thumb-list { display: flex; flex-direction: column; gap: 8px; }
+.thumb {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #E0E8E4; border-radius: 8px;
+  cursor: pointer; font-size: 12.5px; color: #42535C; background: #FFF; text-align: left; width: 100%;
+}
+.thumb:hover { border-color: #A9C9BB; }
+.thumb.active { border-color: var(--primary); background: #F1FAF6; color: var(--primary-deep); font-weight: 800; }
+.thumb .num {
+  width: 22px; height: 22px; border-radius: 6px; background: #E9F0EC; color: #647680; font-size: 11px;
+  display: flex; align-items: center; justify-content: center; flex: none; font-weight: 800;
+}
+.thumb.active .num { background: var(--primary); color: #FFF; }
+.thumb .tag { margin-left: auto; font-size: 10.5px; color: var(--faint); }
+.demo-controls { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.switch-row { display: flex; align-items: center; justify-content: space-between; background: #F7FAF8; border: 1px solid #E4EBE7; border-radius: 8px; padding: 10px 12px; font-size: 12.5px; color: var(--ink-2); font-weight: 600; }
+.switch { width: 38px; height: 22px; border-radius: 12px; background: #C7D2CC; position: relative; cursor: pointer; flex: none; transition: background .15s ease; }
+.switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #FFF; transition: left .15s ease; }
+.switch.on { background: var(--primary); }
+.switch.on::after { left: 19px; }
+.demo-note { margin-top: 16px; font-size: 12px; color: #73828A; background: #F6F9F7; border: 1px solid #E4EBE7; border-radius: 8px; padding: 12px; line-height: 1.75; }
+.demo-note b { color: var(--ink-2); }
+
+.spec-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+.spec-card { grid-column: span 4; background: var(--surface); border: 1px solid #DFE7E3; border-radius: 8px; padding: 18px; }
+.spec-card h3 { margin: 0 0 14px; font-size: 14.5px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.spec-card h3 .dot { width: 10px; height: 10px; border-radius: 3px; }
+.swatch-list { display: flex; flex-direction: column; gap: 10px; }
+.swatch { display: flex; align-items: center; gap: 12px; }
+.swatch .color { width: 34px; height: 34px; border-radius: 8px; border: 1px solid rgba(0,0,0,.06); flex: none; }
+.swatch .info { font-size: 12px; }
+.swatch .info b { display: block; font-size: 12.5px; }
+.swatch .info span { color: var(--faint); font-size: 11px; }
+.type-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px dashed #E3EAE6; }
+.type-row:last-child { border-bottom: 0; }
+.type-row b { font-weight: 800; }
+.type-row span { font-size: 11px; color: var(--faint); }
+.token-list { display: flex; flex-direction: column; gap: 10px; }
+.token-item { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--ink-2); background: #F7FAF8; border: 1px solid #E4EBE7; border-radius: 8px; padding: 9px 12px; }
+.token-item code { font-family: Consolas, Monaco, monospace; color: var(--primary-deep); font-size: 11.5px; }
+.rule-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.rule-list li { display: flex; gap: 10px; font-size: 12.5px; color: var(--ink-2); line-height: 1.65; }
+.rule-list li svg { flex: none; margin-top: 2px; color: var(--primary); }
+
+.comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.comp-card { background: var(--surface); border: 1px solid #DFE7E3; border-radius: 8px; padding: 16px; }
+.comp-card h3 { margin: 0 0 6px; font-size: 14px; font-weight: 800; }
+.comp-card .comp-usage { margin: 0 0 12px; font-size: 11.5px; color: var(--faint); line-height: 1.6; }
+.comp-demo { border: 1px dashed #D4DEDA; border-radius: 8px; padding: 14px; background: #FAFCFB; display: flex; align-items: center; justify-content: center; min-height: 96px; }
+.comp-states { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.comp-state { font-size: 10.5px; color: var(--muted); background: #EEF3F0; border-radius: 20px; padding: 3px 8px; }
+.mini-member { width: 100%; display: flex; align-items: center; gap: 10px; background: #FFF; border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.mini-member .info { flex: 1; }
+.mini-member .info b { display: block; font-size: 12.5px; }
+.mini-member .info span { font-size: 10.5px; color: var(--faint); }
+.mini-bar { width: 100%; height: 8px; border-radius: 8px; background: #E9F0EC; overflow: hidden; }
+.mini-bar i { display: block; height: 100%; width: 60%; background: linear-gradient(90deg, #12A878, #34C08A); border-radius: 8px; }
+.mini-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 34px; padding: 0 14px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+.mini-btn.primary { background: var(--primary); color: #FFF; }
+.mini-btn.secondary { background: #FFF; color: var(--ink-2); border: 1px solid #D5E0DB; }
+.mini-btn.danger { background: var(--danger); color: #FFF; }
+.mini-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: #0E8A61; background: #E4F6EE; border-radius: 20px; padding: 4px 9px; }
+.mini-chip { font-size: 11px; color: #4A5A63; background: #FFF; border: 1px solid #D5E0DB; border-radius: 8px; padding: 5px 9px; }
+.mini-chip.active { color: var(--primary-deep); background: var(--primary-soft); border-color: var(--primary); font-weight: 800; }
+
+.doll-stage { display: grid; grid-template-columns: 320px 1fr; gap: 20px; align-items: start; }
+.doll-visual { background: #FFF7F1; border: 1px solid #F4DCCB; border-radius: 8px; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; }
+.doll-figure { width: 190px; }
+.doll-bubble {
+  width: 100%; background: #FFF; border: 1px solid #F0DCCE; border-radius: 8px; padding: 14px 16px;
+  font-size: 13.5px; color: #6B3F24; line-height: 1.7; margin-top: 14px; position: relative; text-align: center; font-weight: 600;
+}
+.doll-bubble::before { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 14px; height: 14px; background: #FFF; border-left: 1px solid #F0DCCE; border-top: 1px solid #F0DCCE; }
+.doll-meta { width: 100%; display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
+.doll-meta span { font-size: 11px; color: #A97B5A; background: #FFF1E7; border: 1px solid #F2DDCB; border-radius: 20px; padding: 5px 10px; }
+.doll-modes { display: flex; gap: 8px; width: 100%; margin-top: 14px; }
+.mode-btn { flex: 1; height: 38px; border: 1px solid #E7D2C2; background: #FFF; border-radius: 8px; color: #8A5B38; font-size: 13px; font-weight: 700; cursor: pointer; }
+.mode-btn.active { background: var(--coral); border-color: var(--coral); color: #FFF; }
+.state-list { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 14px; }
+.state-row {
+  display: flex; align-items: flex-start; gap: 10px; background: #FFF; border: 1px solid #F2E1D3; border-radius: 8px;
+  padding: 11px 13px; cursor: pointer; text-align: left; width: 100%;
+}
+.state-row .snum { width: 22px; height: 22px; border-radius: 6px; background: #F8E7D9; color: #B2714A; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex: none; }
+.state-row .stext b { display: block; font-size: 12.5px; color: #6B3F24; }
+.state-row .stext span { font-size: 11px; color: #A97B5A; line-height: 1.55; }
+.state-row.active { border-color: var(--coral); background: #FFF6F0; box-shadow: 0 0 0 3px rgba(255, 122, 92, .1); }
+.state-row.active .snum { background: var(--coral); color: #FFF; }
+.doll-card { background: var(--surface); border: 1px solid #DFE7E3; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.doll-card h3 { margin: 0 0 10px; font-size: 14px; font-weight: 800; }
+.doll-card p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+.response-table { width: 100%; border-collapse: collapse; background: #FFF; border: 1px solid #DFE7E3; border-radius: 8px; overflow: hidden; font-size: 12.5px; }
+.response-table th { background: #F4F8F6; text-align: left; font-size: 11.5px; color: var(--muted); padding: 9px 12px; }
+.response-table td { padding: 11px 12px; border-top: 1px solid #EDF1EF; color: var(--ink-2); line-height: 1.6; }
+.response-table .tag { display: inline-block; font-size: 10.5px; font-weight: 800; border-radius: 20px; padding: 3px 8px; }
+.tag.child { background: #FFE8DC; color: #D95F34; }
+.tag.adult { background: #E4F1FC; color: #2B74AD; }
+.tag.guest { background: #EDF2EF; color: #5F726B; }
+
+.section-title-lg { font-size: 16px; font-weight: 800; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+
+@media (max-width: 1100px) {
+  .showcase { grid-template-columns: 1fr; }
+  .side-panel { order: 2; }
+  .spec-card { grid-column: span 6; }
+  .comp-grid { grid-template-columns: repeat(2, 1fr); }
+  .doll-stage { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .app-shell { padding: 14px 12px 28px; }
+  .header-meta { margin-left: 0; }
+  .spec-card { grid-column: span 12; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .phone { width: min(390px, calc(100vw - 34px)); height: min(812px, calc(100vh - 20px)); }
+  .preview-stage { min-height: 0; padding: 22px 8px; }
+  .preview-stage::before { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <header class="top-header">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2.2 0 3.6 1.3 3.9 3.1.6-.2 1.3-.2 1.9.2.9.5 1.3 1.5 1 2.4-.6.1-1.2.4-1.7.8.4.5.6 1.1.6 1.7 0 1.7-1.3 3-3 3.3"/><path d="M9 3c-2.2 0-3.6 1.3-3.9 3.1C4.5 5.9 3.8 5.9 3.2 6.3c-.9.5-1.3 1.5-1 2.4.6.1 1.2.4 1.7.8-.4.5-.6 1.1-.6 1.7 0 1.7 1.3 3 3 3.3"/><path d="M12 20c-3.9 0-6-2.4-6-5.5 0-2.6 2-4.5 4.5-4.5h3c2.5 0 4.5 1.9 4.5 4.5 0 3.1-2.1 5.5-6 5.5z"/><path d="M9.5 14.5h.01M14.5 14.5h.01"/></svg>
+      </div>
+      <div>
+        <h1>小乐声纹识别系统</h1>
+        <p>UI 视觉稿 · 家长端小程序 + 玩偶端语音设计</p>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="pill"><strong>5</strong> 个小程序页面</span>
+      <span class="pill"><strong>2</strong> 个玩偶端模式</span>
+      <span class="pill"><strong>1</strong> 套设计系统</span>
+      <span class="pill">v1.0 · 2026-08-19</span>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="视觉稿分区">
+    <button class="tab-btn active" data-tab="prototype" type="button">页面原型</button>
+    <button class="tab-btn" data-tab="spec" type="button">视觉规格</button>
+    <button class="tab-btn" data-tab="components" type="button">组件文档</button>
+    <button class="tab-btn" data-tab="doll" type="button">玩偶端语音设计</button>
+  </nav>
+
+  <section class="tab-section active" id="tab-prototype">
+    <div class="showcase">
+      <div class="preview-stage">
+        <div class="phone">
+          <div class="screen">
+            <div class="notch"></div>
+            <div class="statusbar">
+              <span>9:41</span>
+              <div class="status-right">
+                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1.5 9.5V7.2M5.5 9.5V4.8M9.5 9.5V2.3M13.5 9.5v-3M15.5 9.5V6"/></svg>
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><rect x="0.5" y="8" width="3" height="3.5" rx="1"/><rect x="4.5" y="6" width="3" height="5.5" rx="1"/><rect x="8.5" y="3.5" width="3" height="8" rx="1"/><rect x="12.5" y="1" width="3" height="10.5" rx="1"/></svg>
+                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5a8 8 0 0 1 13 0"/><path d="M5 11.5a4.5 4.5 0 0 1 7 0"/><circle cx="8.5" cy="4.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+              </div>
+            </div>
+
+            <section class="page" id="page-p1" aria-label="声纹管理首页">
+              <header class="topbar">
+                <div class="side"><button class="icon-btn" type="button" aria-label="返回"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+                <div class="title">声纹管理</div>
+                <div class="side right"><button class="icon-btn" id="topAddBtn" type="button" aria-label="添加成员并注册声纹"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></button></div>
+              </header>
+              <div class="security-banner">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+                声纹数据已加密存储，仅本家庭可识别
+              </div>
+              <div class="page-scroll">
+                <div class="section-block">
+                  <div class="section-head"><span class="section-title">已建档成员</span><span class="section-count" id="registeredCount">2</span></div>
+                  <div id="registeredList"></div>
+                </div>
+                <div class="section-block">
+                  <div class="section-head"><span class="section-title">待注册成员</span><span class="section-count" id="pendingCount">1</span></div>
+                  <div id="pendingList"></div>
+                </div>
+                <button class="visitor-row" id="visitorRow" type="button">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
+                  未注册声音自动识别为访客，不混入成长报告
+                  <span class="link">说明 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+                </button>
+              </div>
+              <footer class="bottom-bar">
+                <button class="btn btn-primary" id="addMemberBtn" type="button">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                  添加新成员并注册声纹
+                </button>
+              </footer>
+            </section>
+
+            <section class="page hidden" id="page-p2" aria-label="声纹注册引导页">
+              <header class="topbar">
+                <div class="side"><button class="icon-btn" id="backToP1" type="button" aria-label="返回"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+                <div class="title">添加成员并注册声纹</div>
+                <div class="side right"><span class="step-pill">步骤 1/2</span></div>
+              </header>
+              <div class="page-scroll">
+                <div class="step-indicator" aria-hidden="true">
+                  <span class="step-item active"><span class="step-dot">1</span>填写成员信息</span>
+                  <span class="step-line active"></span>
+                  <span class="step-item"><span class="step-dot">2</span>连接玩偶</span>
+                </div>
+
+                <div class="section-title" style="margin-bottom:4px">第一步 · 填写成员信息</div>
+                <div class="role-grid">
+                  <button class="role-card" data-role="child" type="button" aria-pressed="false">
+                    <span class="avatar lg" style="--avatar-bg:#FFE9DE;--avatar-fg:#E96A3E">
+                      <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="2.1" fill="currentColor" stroke="none"/><circle cx="20" cy="10" r="2.1" fill="currentColor" stroke="none"/><path d="M11.5 15.6c2.4 2 6 2 8.4 0"/><path d="M15 4.5c-2.2 0-3.7 1.2-3.9 3.1-.6-.2-1.2-.2-1.8.2-.9.5-1.2 1.5-.9 2.4.6.1 1.1.4 1.6.8"/><path d="M15 4.5c2.2 0 3.7 1.2 3.9 3.1.6-.2 1.2-.2 1.8.2.9.5 1.2 1.5.9 2.4-.6.1-1.1.4-1.6.8"/></svg>
+                    </span>
+                    <b>儿童</b><span>孩子本人</span>
+                  </button>
+                  <button class="role-card" data-role="adult" type="button" aria-pressed="false">
+                    <span class="avatar lg" style="--avatar-bg:#E2F1FC;--avatar-fg:#2E7EB8">
+                      <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="9.5" r="1.7" fill="currentColor" stroke="none"/><circle cx="20" cy="9.5" r="1.7" fill="currentColor" stroke="none"/><path d="M11 16.4c2.6 1.8 5.4 1.8 8 0"/><path d="M15 3.5c-2 0-3.4 1.1-3.7 2.9-.5-.1-1-.1-1.6.3-.8.5-1 1.4-.7 2.2.6.1 1 .4 1.4.8"/><path d="M15 3.5c2 0 3.4 1.1 3.7 2.9.5-.1 1-.1 1.6.3.8.5 1 1.4.7 2.2-.6.1-1 .4-1.4.8"/></svg>
+                    </span>
+                    <b>成人</b><span>家人照护者</span>
+                  </button>
+                </div>
+
+                <div class="field" id="childFields">
+                  <label>小名 <span class="required">*</span></label>
+                  <input id="nicknameInput" maxlength="8" placeholder="请输入孩子的小名（2-8个字）" autocomplete="off">
+                  <p class="field-help"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>小乐识别到孩子后会叫出这个小名</p>
+                </div>
+
+                <div class="field hidden" id="adultFields">
+                  <label>称谓 <span class="required">*</span></label>
+                  <div class="chip-group">
+                    <button class="chip-choice" data-title="爸爸" type="button">爸爸</button>
+                    <button class="chip-choice" data-title="妈妈" type="button">妈妈</button>
+                    <button class="chip-choice" data-title="自定义" type="button">自定义</button>
+                  </div>
+                  <input id="customTitleInput" class="hidden" style="margin-top:10px" maxlength="6" placeholder="请输入称谓（如：奶奶、外公 2-6字）" autocomplete="off">
+                  <p class="field-help"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>小乐会用此称谓礼貌回应该家庭成员</p>
+                </div>
+
+                <div class="error-text hidden" id="p2Error">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+                  <span id="p2ErrorText"></span>
+                </div>
+
+                <div class="section-title" style="margin-top:22px;margin-bottom:0">第二步 · 连接玩偶</div>
+                <div class="connect-card">
+                  <label class="check-row">
+                    <input type="checkbox" id="deviceCheck">
+                    请确认小乐玩偶已开机并联网
+                  </label>
+                  <div class="env-row">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                    <span>保持环境安静：关闭电视/音乐，距玩偶 0.5-1 米</span>
+                  </div>
+                  <span class="device-status" id="deviceStatus"><span class="dot online"></span>在线 · 待接收指令</span>
+                </div>
+              </div>
+              <footer class="bottom-bar">
+                <button class="btn btn-primary" id="startBtn" type="button" disabled>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                  开始注册声纹
+                </button>
+              </footer>
+            </section>
+
+            <section class="page hidden" id="page-p3" aria-label="声纹注册采集页">
+              <header class="topbar">
+                <div class="side"><button class="icon-btn" id="backToP2" type="button" aria-label="返回"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+                <div class="title">添加成员并注册声纹</div>
+                <div class="side right"><span class="step-pill">步骤 2/2</span></div>
+              </header>
+              <div class="page-scroll">
+                <div class="enroll-target">正在为「<b id="p3Name">乐乐</b>（儿童）」注册声纹</div>
+                <div class="guide-card">
+                  <div class="guide-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>请对着小乐说出</div>
+                  <p>今天天气真好呀，<br>我们一起出去玩吧</p>
+                  <button class="btn-ghost" id="playSampleBtn" type="button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.6-6.86a1 1 0 0 0 0-1.7L9.52 4.3A1 1 0 0 0 8 5.14z"/></svg>
+                    播放示例
+                  </button>
+                </div>
+                <div class="progress-card">
+                  <div class="progress-head"><span>录音进度</span><b id="progressText">有效 0/30 秒</b></div>
+                  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+                  <div class="record-status" id="recordStatus"><span class="rec-dot"></span>录音中 · 请正常语速朗读</div>
+                </div>
+                <div class="warning-banner hidden" id="noiseBanner">
+                  <div class="warn-title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>检测到环境噪音较大</div>
+                  <div class="warn-sub">已自动暂停采集，请安静后继续</div>
+                  <div class="warning-actions">
+                    <button class="btn-ghost" id="resumeBtn" type="button">继续采集</button>
+                    <button class="btn-ghost" id="restartBtn" type="button">重新开始</button>
+                  </div>
+                </div>
+              </div>
+              <footer class="bottom-bar">
+                <button class="btn btn-secondary" id="pauseBtn" type="button">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></svg>
+                  暂停采集
+                </button>
+              </footer>
+            </section>
+
+            <section class="page hidden" id="page-p4" aria-label="注册结果页">
+              <div class="result">
+                <div class="result-icon success" id="resultIcon">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <h1 id="resultTitle">声纹注册成功</h1>
+                <div class="result-sub" id="resultSub">小乐已经记住这位家庭成员的声音</div>
+                <div class="result-card">
+                  <div class="profile">
+                    <span class="avatar lg" id="resultAvatar" style="--avatar-bg:#FFE9DE;--avatar-fg:#E96A3E">
+                      <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="2.1" fill="currentColor" stroke="none"/><circle cx="20" cy="10" r="2.1" fill="currentColor" stroke="none"/><path d="M11.5 15.6c2.4 2 6 2 8.4 0"/><path d="M15 4.5c-2.2 0-3.7 1.2-3.9 3.1-.6-.2-1.2-.2-1.8.2-.9.5-1.2 1.5-.9 2.4.6.1 1.1.4 1.6.8"/><path d="M15 4.5c2.2 0 3.7 1.2 3.9 3.1.6-.2 1.2-.2 1.8.2.9.5 1.2 1.5.9 2.4-.6.1-1.1.4-1.6.8"/></svg>
+                    </span>
+                    <div><b id="resultProfileName">已为「乐乐」建档</b><span id="resultProfileMeta">儿童 · 2026-08-19</span></div>
+                  </div>
+                  <div class="secure-line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>声纹已加密存储，仅本家庭可识别</div>
+                </div>
+                <div class="fail-reasons hidden" id="failReasons">
+                  <div class="fail-reason"><span class="icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></span>有效音频不足，未达到 30 秒</div>
+                  <div class="fail-reason"><span class="icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>采集过程中网络中断</div>
+                </div>
+                <div class="tip-banner hidden" id="successTip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2M5.6 5.6l1.4 1.4M3 12h2M19 12h2M17 7l1.4-1.4M12 19v2M8 15l-2.5 2.5"/><circle cx="12" cy="12" r="4"/></svg>小提示：现在叫一声「小乐」试试认人打招呼</div>
+                <button class="btn btn-primary" id="doneBtn" type="button">完成</button>
+                <button class="btn btn-secondary" id="againBtn" type="button">再录一次</button>
+                <button class="btn btn-primary hidden" id="retryBtn" type="button">重新采集</button>
+                <button class="btn btn-secondary hidden" id="backListBtn" type="button">返回成员列表</button>
+              </div>
+            </section>
+
+            <div class="modal-backdrop hidden" id="deleteModal" role="dialog" aria-modal="true" aria-label="删除声纹确认">
+              <div class="modal-card">
+                <div class="modal-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></div>
+                <h2>删除声纹</h2>
+                <p class="modal-desc">确认删除「<b id="delName">妈妈</b>」的声纹吗？</p>
+                <ul>
+                  <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>删除后，小乐将无法识别该成员的声音</li>
+                  <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>后续与小乐说话将按「访客」处理</li>
+                  <li id="delLogsNote" class="hidden"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2M5.6 5.6l1.4 1.4M3 12h2M19 12h2M17 7l1.4-1.4M12 19v2M8 15l-2.5 2.5"/><circle cx="12" cy="12" r="4"/></svg>该成员存在对话日志，历史报告保留，角色标记将移除</li>
+                  <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>历史数据保留，但角色标记将被移除</li>
+                </ul>
+                <div class="modal-actions">
+                  <button class="btn btn-secondary" id="cancelDelete" type="button">取消</button>
+                  <button class="btn btn-danger" id="confirmDelete" type="button">确认删除</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-backdrop hidden" id="visitorSheet" role="dialog" aria-modal="true" aria-label="访客识别说明">
+              <div class="bottom-sheet">
+                <div class="sheet-handle"></div>
+                <h3>访客如何识别？</h3>
+                <p>没有注册过声纹的声音，小乐会按「访客」对待：正常打招呼，但不会把对话记入家庭成长数据。</p>
+                <ul>
+                  <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>访客的声音不会混入孩子的语言分析</li>
+                  <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>访客对话仅标记发生时间，不建立记忆档案</li>
+                  <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>想让孩子的小伙伴也被小乐记住，可为 TA 注册声纹</li>
+                </ul>
+                <button class="btn btn-primary" id="closeVisitor" type="button">知道了</button>
+              </div>
+            </div>
+
+            <div class="toast hidden" id="toast" role="status" aria-live="polite">
+              <span id="toastText">已删除</span>
+              <button id="undoToast" type="button">撤销</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <div class="panel-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>页面导航</div>
+        <div class="thumb-list">
+          <button class="thumb active" data-goto="p1" type="button"><span class="num">01</span>声纹管理首页<span class="tag">成员档案</span></button>
+          <button class="thumb" data-goto="p2" type="button"><span class="num">02</span>注册引导页<span class="tag">角色 + 连接</span></button>
+          <button class="thumb" data-goto="p3" type="button"><span class="num">03</span>录音采集页<span class="tag">跟读 + 进度</span></button>
+          <button class="thumb" data-goto="p4" type="button"><span class="num">04</span>注册结果页<span class="tag">成功 / 失败</span></button>
+        </div>
+
+        <div class="panel-title" style="margin-top:18px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>演示控制</div>
+        <div class="demo-controls">
+          <div class="switch-row"><span>玩偶在线状态</span><span class="switch on" id="onlineSwitch" role="switch" aria-checked="true" tabindex="0"></span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button class="btn-ghost" id="simNoiseBtn" type="button">模拟噪音</button>
+            <button class="btn-ghost" id="simSuccessBtn" type="button">完成采集</button>
+            <button class="btn-ghost" id="simFailBtn" type="button">模拟失败</button>
+            <button class="btn-ghost" id="resetDemoBtn" type="button">重置原型</button>
+          </div>
+        </div>
+
+        <div class="demo-note" id="pageNote">
+          <b>P1 · 声纹管理首页</b><br>
+          已建档 / 待注册分组展示，删除通过「更多」菜单进入二次确认；底部通栏按钮承载新增注册。
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="tab-section" id="tab-spec">
+    <div class="spec-grid">
+      <div class="spec-card">
+        <h3><span class="dot" style="background:var(--primary)"></span>色彩系统</h3>
+        <div class="swatch-list">
+          <div class="swatch"><span class="color" style="background:#12A878"></span><div class="info"><b>小乐绿 · Primary</b><span>#12A878 · 主操作、识别成功</span></div></div>
+          <div class="swatch"><span class="color" style="background:#FF7A5C"></span><div class="info"><b>暖橙 · Accent</b><span>#FF7A5C · 玩偶形象、亲切提醒</span></div></div>
+          <div class="swatch"><span class="color" style="background:#F2B544"></span><div class="info"><b>琥珀 · Warning</b><span>#F2B544 · 噪音、等待状态</span></div></div>
+          <div class="swatch"><span class="color" style="background:#4C9EEB"></span><div class="info"><b>晴蓝 · Info</b><span>#4C9EEB · 引导提示、成人标签</span></div></div>
+          <div class="swatch"><span class="color" style="background:#E5484D"></span><div class="info"><b>警示红 · Danger</b><span>#E5484D · 删除、失败</span></div></div>
+          <div class="swatch"><span class="color" style="background:#182630"></span><div class="info"><b>墨色 · Text</b><span>#182630 · 标题与正文</span></div></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <h3><span class="dot" style="background:var(--amber)"></span>字体与层级</h3>
+        <div class="type-row"><b style="font-size:20px">页面标题</b><span>20 / 28 · 800</span></div>
+        <div class="type-row"><b style="font-size:17px">卡片标题</b><span>17 / 24 · 800</span></div>
+        <div class="type-row"><b style="font-size:15px">正文强调</b><span>15 / 22 · 700</span></div>
+        <div class="type-row"><b style="font-size:13px">正文</b><span>13 / 20 · 400-600</span></div>
+        <div class="type-row"><b style="font-size:12px">辅助说明</b><span>12 / 18 · 400</span></div>
+        <div class="type-row"><b style="font-size:11px">标签微文案</b><span>11 / 16 · 700</span></div>
+        <div class="token-list" style="margin-top:14px">
+          <div class="token-item"><span>字体栈</span><code>PingFang SC / Microsoft YaHei</code></div>
+          <div class="token-item"><span>字间距</span><code>0</code></div>
+          <div class="token-item"><span>数字</span><code>Tabular · 等宽数字</code></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <h3><span class="dot" style="background:var(--sky)"></span>间距 · 圆角 · 阴影</h3>
+        <div class="token-list">
+          <div class="token-item"><span>基础间距栅格</span><code>4 / 8 / 12 / 16 / 20 / 24</code></div>
+          <div class="token-item"><span>页面左右边距</span><code>18 px</code></div>
+          <div class="token-item"><span>卡片圆角</span><code>8 px</code></div>
+          <div class="token-item"><span>按钮圆角</span><code>8 px</code></div>
+          <div class="token-item"><span>设备外壳圆角</span><code>44 px</code></div>
+          <div class="token-item"><span>卡片阴影</span><code>0 1px 2px rgba(16,24,40,.06)</code></div>
+          <div class="token-item"><span>浮层阴影</span><code>0 22px 50px rgba(18,28,34,.28)</code></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <h3><span class="dot" style="background:var(--coral)"></span>图标与插画</h3>
+        <div class="rule-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>功能图标统一 1.8px 线性风格，24px 栅格内居中</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>成员头像使用柔和色底 + 表情插画，儿童暖橙 / 成人晴蓝</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>玩偶插画使用暖橙渐变，保持圆润、无阴影硬边</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>危险操作使用实心红图标，帮助与说明使用线框图标</li>
+        </div>
+      </div>
+      <div class="spec-card">
+        <h3><span class="dot" style="background:var(--success)"></span>页面映射</h3>
+        <div class="token-list">
+          <div class="token-item"><span>P1 声纹管理首页</span><code>REQ001/002/007</code></div>
+          <div class="token-item"><span>P2 注册引导页</span><code>REQ001/002 · SOL001</code></div>
+          <div class="token-item"><span>P3 录音采集页</span><code>REQ001/002 · SOL001</code></div>
+          <div class="token-item"><span>P4 注册结果页</span><code>REQ001/002</code></div>
+          <div class="token-item"><span>P5 删除确认弹窗</span><code>REQ007 · B4/B5</code></div>
+          <div class="token-item"><span>D1/D2 玩偶端</span><code>SOL001 · REQ003-008</code></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <h3><span class="dot" style="background:#1D9CBE"></span>无障碍与状态</h3>
+        <div class="rule-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>正文与背景对比度 ≥ 4.5:1，标签 ≥ 3:1</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>主按钮禁用态不依赖颜色，同时降低可点性</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>成功 / 失败同时使用图标 + 文字双重表达</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>采集进度每秒更新，并用「有效秒数」明确口径</li>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-section" id="tab-components">
+    <div class="comp-grid">
+      <div class="comp-card">
+        <h3>顶栏 Topbar</h3>
+        <p class="comp-usage">返回 / 居中标题 / 右侧动作，页面与页面之间保持同构。</p>
+        <div class="comp-demo">
+          <div style="width:100%;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px">
+            <span class="icon-btn" style="width:30px;height:30px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></span>
+            <b style="flex:1;text-align:center;font-size:13px">声纹管理</b>
+            <span class="mini-btn primary" style="height:28px;padding:0 8px;font-size:11px">+ 注册</span>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">含步骤态</span><span class="comp-state">补录态</span><span class="comp-state">加载态</span></div>
+      </div>
+      <div class="comp-card">
+        <h3>成员卡片 Member Card</h3>
+        <p class="comp-usage">已建档 / 待注册两种形态，右侧操作位承载状态或更多菜单。</p>
+        <div class="comp-demo">
+          <div class="mini-member">
+            <span class="avatar" style="width:36px;height:36px;--avatar-bg:#FFE9DE;--avatar-fg:#E96A3E"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="2.1" fill="currentColor" stroke="none"/><circle cx="20" cy="10" r="2.1" fill="currentColor" stroke="none"/><path d="M11.5 15.6c2.4 2 6 2 8.4 0"/></svg></span>
+            <div class="info"><b>乐乐 <span class="role-tag child" style="font-size:9.5px">儿童</span></b><span>注册于 08-12 · 已建档</span></div>
+            <span class="mini-pill">已建档</span>
+            <span class="icon-btn" style="width:28px;height:28px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></span>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">已建档</span><span class="comp-state">待注册</span><span class="comp-state">删除中</span></div>
+      </div>
+      <div class="comp-card">
+        <h3>角色卡片 Role Card</h3>
+        <p class="comp-usage">儿童 / 成人双卡单选，选中后绿色描边 + 浅底高亮。</p>
+        <div class="comp-demo">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%">
+            <button class="mini-chip active" type="button" style="text-align:center;height:44px;display:flex;flex-direction:column;justify-content:center;gap:2px"><b style="font-size:12px">儿童</b><span style="font-size:10px;font-weight:400">孩子本人</span></button>
+            <button class="mini-chip" type="button" style="text-align:center;height:44px;display:flex;flex-direction:column;justify-content:center;gap:2px"><b style="font-size:12px">成人</b><span style="font-size:10px;font-weight:400">家人照护者</span></button>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">未选中</span><span class="comp-state">选中</span><span class="comp-state">补录预填</span></div>
+      </div>
+      <div class="comp-card">
+        <h3>采集进度 Progress</h3>
+        <p class="comp-usage">仅累计有效音频，秒数实时回传，噪音暂停时进度保留。</p>
+        <div class="comp-demo">
+          <div style="width:100%">
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px"><span>录音进度</span><b style="color:var(--primary-deep)">有效 18/30 秒</b></div>
+            <div class="mini-bar"><i style="width:60%"></i></div>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">采集中</span><span class="comp-state">噪音暂停</span><span class="comp-state">完成</span><span class="comp-state">超时</span></div>
+      </div>
+      <div class="comp-card">
+        <h3>主按钮 Primary Button</h3>
+        <p class="comp-usage">通栏主按钮承载关键动作，条件不满足时禁用并给出校验提示。</p>
+        <div class="comp-demo">
+          <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+            <span class="mini-btn primary">开始注册声纹</span>
+            <span class="mini-btn secondary">再录一次</span>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">默认</span><span class="comp-state">禁用</span><span class="comp-state">Loading</span><span class="comp-state">危险（红）</span></div>
+      </div>
+      <div class="comp-card">
+        <h3>状态浮层 Modal / Sheet / Toast</h3>
+        <p class="comp-usage">破坏性操作用居中弹窗；解释性内容用底部抽屉；轻反馈用 Toast 并支持撤销。</p>
+        <div class="comp-demo">
+          <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+            <span style="font-size:11px;color:var(--muted)">居中弹窗 · 二次确认</span>
+            <span style="font-size:11px;color:var(--muted)">底部抽屉 · 访客说明</span>
+            <span style="display:flex;justify-content:space-between;align-items:center;background:#1E2C33;color:#fff;border-radius:8px;padding:8px 10px;font-size:11px">已删除「妈妈」的声纹 <b style="color:#7FE0BC">撤销</b></span>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">确认弹窗</span><span class="comp-state">底部抽屉</span><span class="comp-state">撤销 Toast</span></div>
+      </div>
+      <div class="comp-card">
+        <h3>警告条 Warning Banner</h3>
+        <p class="comp-usage">噪音、离线、网络中断等场景使用，附双操作按钮。</p>
+        <div class="comp-demo">
+          <div style="width:100%;background:var(--amber-soft);border:1px solid #F2C98F;border-radius:8px;padding:10px;font-size:11px;color:#9A5B12">
+            <b>检测到环境噪音较大</b>
+            <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px">
+              <span class="mini-btn secondary" style="height:26px;font-size:10px">继续采集</span>
+              <span class="mini-btn secondary" style="height:26px;font-size:10px">重新开始</span>
+            </div>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">噪音</span><span class="comp-state">离线</span><span class="comp-state">网络中断</span></div>
+      </div>
+      <div class="comp-card">
+        <h3>状态标签 Status Pill</h3>
+        <p class="comp-usage">已建档 / 在线 / 角色标签等状态点，统一圆角胶囊。</p>
+        <div class="comp-demo">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+            <span class="mini-pill">已建档</span>
+            <span class="mini-pill" style="color:#2B74AD;background:#E4F1FC">成人</span>
+            <span class="mini-pill" style="color:#D95F34;background:#FFE8DC">儿童</span>
+            <span class="mini-pill" style="color:#5F726B;background:#EDF2EF">访客</span>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">角色</span><span class="comp-state">建档</span><span class="comp-state">设备在线</span></div>
+      </div>
+      <div class="comp-card">
+        <h3>信息条 Info Row</h3>
+        <p class="comp-usage">加密提示、环境准备、访客说明等静态信息，配合图标降低阅读成本。</p>
+        <div class="comp-demo">
+          <div style="display:flex;flex-direction:column;gap:6px;width:100%">
+            <span style="display:flex;align-items:center;gap:6px;background:var(--primary-soft);color:#0B6B4F;border-radius:8px;padding:7px 9px;font-size:10.5px">声纹数据已加密存储，仅本家庭可识别</span>
+            <span style="display:flex;align-items:center;gap:6px;background:#F0F5F3;border-radius:8px;padding:7px 9px;font-size:10.5px;color:#51626B">未注册声音自动识别为访客</span>
+          </div>
+        </div>
+        <div class="comp-states"><span class="comp-state">安全提示</span><span class="comp-state">访客说明</span><span class="comp-state">环境准备</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-section" id="tab-doll">
+    <div class="doll-stage">
+      <div class="doll-visual">
+        <svg class="doll-figure" viewBox="0 0 160 190" role="img" aria-label="小乐玩偶形象">
+          <ellipse cx="80" cy="142" rx="52" ry="40" fill="#F37B3D"/>
+          <ellipse cx="80" cy="138" rx="31" ry="24" fill="#FFE3CF"/>
+          <path d="M42 62c-9 5-14 12-13 22l8-2c-1-7 2-12 8-16l-3-4z" fill="#F37B3D"/>
+          <path d="M118 62c9 5 14 12 13 22l-8-2c1-7-2-12-8-16l3-4z" fill="#F37B3D"/>
+          <circle cx="41" cy="52" r="16" fill="#F37B3D"/>
+          <circle cx="41" cy="52" r="8" fill="#FFD3B8"/>
+          <circle cx="119" cy="52" r="16" fill="#F37B3D"/>
+          <circle cx="119" cy="52" r="8" fill="#FFD3B8"/>
+          <ellipse cx="80" cy="72" rx="44" ry="40" fill="#FF8A4C"/>
+          <ellipse cx="80" cy="78" rx="31" ry="27" fill="#FFF3E9"/>
+          <circle cx="70" cy="74" r="3" fill="#3D2B21"/>
+          <circle cx="90" cy="74" r="3" fill="#3D2B21"/>
+          <circle cx="72" cy="72" r="1" fill="#FFF"/>
+          <circle cx="92" cy="72" r="1" fill="#FFF"/>
+          <path d="M73 84c5 4 9 4 14 0" stroke="#C96A38" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="63" cy="82" rx="4.5" ry="2.8" fill="#FFB7A1"/>
+          <ellipse cx="97" cy="82" rx="4.5" ry="2.8" fill="#FFB7A1"/>
+          <path d="M80 91l5 7-5 4-5-4 5-7z" fill="#F37B3D"/>
+          <path d="M38 140c-7 16-2 29 12 33 13 4 26-3 30-14l-42-19z" fill="#F37B3D"/>
+          <path d="M122 140c7 16 2 29-12 33-13 4-26-3-30-14l42-19z" fill="#F37B3D"/>
+          <ellipse cx="80" cy="168" rx="30" ry="12" fill="#FF9A5E"/>
+        </svg>
+        <div class="doll-bubble" id="dollBubble">我是小乐！请跟我读一句话～</div>
+        <div class="doll-meta">
+          <span>无屏幕</span><span>无灯光</span><span>语音 + 提示音</span>
+        </div>
+        <div class="doll-modes">
+          <button class="mode-btn active" id="modeD1" type="button">D1 注册模式</button>
+          <button class="mode-btn" id="modeD2" type="button">D2 对话识别</button>
+        </div>
+        <div class="state-list" id="dollStateList"></div>
+      </div>
+
+      <div>
+        <h2 class="section-title-lg">玩偶端语音状态设计</h2>
+        <div class="doll-card">
+          <h3>D1 · 声纹注册模式</h3>
+          <p>收到小程序云指令后进入注册模式。语音播报与短提示音共同表达状态，实时向小程序回传采集进度；有效音频、噪音、超时均用固定话术闭环。</p>
+        </div>
+        <div class="doll-card">
+          <h3>D2 · 对话识别模式</h3>
+          <p>唤醒词「小乐小乐」触发 1:N 声纹辨认。唤醒后首次发言确定说话人：儿童加载记忆与安全过滤，成人仅做称谓替换，访客通用回复且不记入成长数据。</p>
+        </div>
+        <div class="doll-card">
+          <h3>角色回应示例</h3>
+          <table class="response-table">
+            <thead><tr><th>识别结果</th><th>小乐回应</th><th>日志标签</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag child">儿童 · 乐乐</span></td><td>乐乐你好呀！今天想聊恐龙还是积木？</td><td>child</td></tr>
+              <tr><td><span class="tag adult">成人 · 妈妈</span></td><td>妈妈您好！今天有什么想聊的吗？</td><td>adult</td></tr>
+              <tr><td><span class="tag guest">访客</span></td><td>你好呀，我是小乐，很高兴见到你！</td><td>guest</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="doll-card">
+          <h3>容错约定</h3>
+          <p>重叠说话时「谁先触发标谁」；识别低置信时按访客处理，不打扰用户；每轮日志携带 role 与 confidence，供未来聊天记录按角色归类。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var state = {
+    page: "p1",
+    tab: "prototype",
+    members: [
+      { id: "mama", name: "妈妈", role: "adult", title: "妈妈", date: "08-12", registered: true, logs: true },
+      { id: "baba", name: "爸爸", role: "adult", title: "爸爸", date: null, registered: false, logs: false }
+    ],
+    flowMode: "add",
+    renewId: null,
+    draft: { role: "", name: "", custom: false, title: "" },
+    deviceOnline: true,
+    deviceConfirmed: false,
+    progress: 0,
+    paused: false,
+    noise: false,
+    timer: null,
+    deleteTarget: null,
+    deletedItem: null,
+    deletedIndex: -1,
+    toastTimer: null,
+    dollMode: "d1",
+    dollState: "d1-idle"
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function icon(name, size) {
+    size = size || 20;
+    var p = {
+      check: '<path d="M20 6L9 17l-5-5"/>',
+      chevron: '<path d="M9 6l6 6-6 6"/>',
+      mic: '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/>',
+      lock: '<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/>',
+      trash: '<path d="M3 6h18"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/>'
+    };
+    return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (p[name] || "") + '</svg>';
+  }
+
+  function avatarSVG(role) {
+    if (role === "child") {
+      return '<svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="2.1" fill="currentColor" stroke="none"/><circle cx="20" cy="10" r="2.1" fill="currentColor" stroke="none"/><path d="M11.5 15.6c2.4 2 6 2 8.4 0"/><path d="M15 4.5c-2.2 0-3.7 1.2-3.9 3.1-.6-.2-1.2-.2-1.8.2-.9.5-1.2 1.5-.9 2.4.6.1 1.1.4 1.6.8"/><path d="M15 4.5c2.2 0 3.7 1.2 3.9 3.1.6-.2 1.2-.2 1.8.2.9.5 1.2 1.5.9 2.4-.6.1-1.1.4-1.6.8"/></svg>';
+    }
+    return '<svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="9.5" r="1.7" fill="currentColor" stroke="none"/><circle cx="20" cy="9.5" r="1.7" fill="currentColor" stroke="none"/><path d="M11 16.4c2.6 1.8 5.4 1.8 8 0"/><path d="M15 3.5c-2 0-3.4 1.1-3.7 2.9-.5-.1-1-.1-1.6.3-.8.5-1 1.4-.7 2.2.6.1 1 .4 1.4.8"/><path d="M15 3.5c2 0 3.4 1.1 3.7 2.9.5-.1 1-.1 1.6.3.8.5 1 1.4.7 2.2-.6.1-1 .4-1.4.8"/></svg>';
+  }
+
+  function avatar(role, cls) {
+    var bg = role === "child" ? "#FFE9DE" : "#E2F1FC";
+    var fg = role === "child" ? "#E96A3E" : "#2E7EB8";
+    return '<span class="avatar ' + (cls || "") + '" style="--avatar-bg:' + bg + ';--avatar-fg:' + fg + '">' + avatarSVG(role) + '</span>';
+  }
+
+  function roleTag(role) {
+    return '<span class="role-tag ' + role + '">' + (role === "child" ? "儿童" : "成人") + '</span>';
+  }
+
+  function memberCard(m) {
+    if (m.registered) {
+      return '<div class="member-card" data-id="' + m.id + '">' +
+        avatar(m.role) +
+        '<div class="member-info"><div class="member-line">' + m.name + roleTag(m.role) + '</div><div class="member-meta">注册于 ' + m.date + ' · 声纹已建档</div></div>' +
+        '<span class="status-pill">' + icon("check", 14) + '已建档</span>' +
+        '<button class="icon-btn" type="button" data-del="' + m.id + '" aria-label="更多操作"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></button>' +
+        '</div>';
+    }
+    return '<div class="member-card" data-id="' + m.id + '">' +
+      avatar(m.role) +
+      '<div class="member-info"><div class="member-line">' + m.name + roleTag(m.role) + '</div><div class="member-meta">未注册声纹</div></div>' +
+      '<button class="btn-ghost small" type="button" data-register="' + m.id + '">去注册 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>' +
+      '</div>';
+  }
+
+  function renderMembers() {
+    var registered = state.members.filter(function (m) { return m.registered; });
+    var pending = state.members.filter(function (m) { return !m.registered; });
+    $("registeredList").innerHTML = registered.map(memberCard).join("") || '<div class="member-card" style="justify-content:center;color:var(--faint);font-size:12px">还没有已建档成员</div>';
+    $("pendingList").innerHTML = pending.map(memberCard).join("") || '<div class="member-card" style="justify-content:center;color:var(--faint);font-size:12px">没有待注册成员</div>';
+    $("registeredCount").textContent = registered.length;
+    $("pendingCount").textContent = pending.length;
+  }
+
+  function go(page) {
+    state.page = page;
+    ["p1", "p2", "p3", "p4"].forEach(function (p) { $("page-" + p).classList.toggle("hidden", p !== page); });
+    document.querySelectorAll(".thumb").forEach(function (t) { t.classList.toggle("active", t.dataset.goto === page); });
+    var notes = {
+      p1: "<b>P1 · 声纹管理首页</b><br>已建档 / 待注册分组展示，删除通过「更多」菜单进入二次确认；底部通栏按钮承载新增注册。",
+      p2: "<b>P2 · 注册引导页</b><br>角色与昵称在同一页完成；玩偶在线且勾选确认后，主按钮才可点击。",
+      p3: "<b>P3 · 录音采集页</b><br>进度只累计有效音频；噪音自动暂停并保留已采部分，右侧演示控制可模拟噪音与完成。",
+      p4: "<b>P4 · 注册结果页</b><br>成功态给出建档摘要与试用引导；失败态列明原因并提供重试路径。"
+    };
+    $("pageNote").innerHTML = notes[page] || "";
+    if (page === "p2") syncP2();
+    if (page === "p3") syncP3();
+  }
+
+  function enterP2(mode, member) {
+    stopTimer();
+    state.flowMode = mode;
+    state.renewId = member ? member.id : null;
+    state.draft = { role: member ? "adult" : "", name: "", custom: false, title: member ? "爸爸" : "" };
+    state.deviceConfirmed = false;
+    $("deviceCheck").checked = false;
+    go("p2");
+  }
+
+  function syncP2() {
+    var d = state.draft;
+    document.querySelectorAll(".role-card").forEach(function (c) {
+      var on = c.dataset.role === d.role;
+      c.classList.toggle("active", on);
+      c.setAttribute("aria-pressed", String(on));
+    });
+    $("childFields").classList.toggle("hidden", d.role !== "child");
+    $("adultFields").classList.toggle("hidden", d.role !== "adult");
+    $("nicknameInput").value = d.role === "child" ? d.name : "";
+    document.querySelectorAll(".chip-choice").forEach(function (c) {
+      var on = d.role === "adult" && c.dataset.title === (d.custom ? "自定义" : d.title);
+      c.classList.toggle("active", on);
+    });
+    $("customTitleInput").classList.toggle("hidden", !d.custom);
+    $("customTitleInput").value = d.custom ? d.name : "";
+    $("p2Error").classList.add("hidden");
+    updateDeviceUI();
+    syncStartBtn();
+  }
+
+  function syncStartBtn() {
+    var d = state.draft;
+    var ok = false;
+    if (d.role === "child") {
+      ok = d.name.trim().length >= 2 && d.name.trim().length <= 8;
+    } else if (d.role === "adult") {
+      if (d.custom) ok = d.name.trim().length >= 2 && d.name.trim().length <= 6;
+      else ok = !!d.title;
+    }
+    ok = ok && state.deviceOnline && state.deviceConfirmed;
+    $("startBtn").disabled = !ok;
+  }
+
+  function showP2Error(text) {
+    $("p2ErrorText").textContent = text;
+    $("p2Error").classList.remove("hidden");
+  }
+
+  function updateDeviceUI() {
+    var s = $("deviceStatus");
+    if (state.deviceOnline) {
+      s.className = "device-status";
+      s.innerHTML = '<span class="dot online"></span>在线 · 待接收指令';
+    } else {
+      s.className = "device-status offline";
+      s.innerHTML = '<span class="dot offline"></span>离线 · 请确认玩偶已开机联网';
+    }
+    $("onlineSwitch").classList.toggle("on", state.deviceOnline);
+    $("onlineSwitch").setAttribute("aria-checked", String(state.deviceOnline));
+    syncStartBtn();
+  }
+
+  function startRecording() {
+    stopTimer();
+    state.progress = 0;
+    state.paused = false;
+    state.noise = false;
+    $("noiseBanner").classList.add("hidden");
+    $("p3Name").textContent = displayName() || "乐乐";
+    go("p3");
+    state.timer = setInterval(function () {
+      if (state.paused) return;
+      state.progress = Math.min(30, state.progress + 1);
+      syncP3();
+      if (state.progress >= 30) {
+        stopTimer();
+        showResult(true);
+      }
+    }, 550);
+  }
+
+  function syncP3() {
+    var pct = Math.round(state.progress / 30 * 100);
+    $("progressFill").style.width = pct + "%";
+    $("progressText").textContent = "有效 " + state.progress + "/30 秒";
+    var rs = $("recordStatus");
+    if (state.noise || state.paused) {
+      rs.innerHTML = '<span class="rec-dot" style="background:var(--amber);animation:none"></span>' + (state.noise ? "已暂停 · 请安静后继续" : "已暂停 · 点击继续采集");
+    } else {
+      rs.innerHTML = '<span class="rec-dot"></span>录音中 · 请正常语速朗读';
+    }
+    $("noiseBanner").classList.toggle("hidden", !state.noise);
+    $("pauseBtn").innerHTML = (state.paused || state.noise)
+      ? icon("check", 18) + '继续采集'
+      : '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></svg>暂停采集';
+  }
+
+  function stopTimer() {
+    if (state.timer) { clearInterval(state.timer); state.timer = null; }
+  }
+
+  function displayName() {
+    var d = state.draft;
+    if (d.role === "child") return d.name.trim();
+    if (d.custom) return d.name.trim();
+    return d.title || "";
+  }
+
+  function applyEnrollment() {
+    if (state.flowMode === "renew" && state.renewId) {
+      state.members.forEach(function (m) {
+        if (m.id === state.renewId) { m.registered = true; m.date = "08-19"; m.logs = false; }
+      });
+    } else {
+      var role = state.draft.role;
+      state.members.unshift({ id: "new-" + Date.now(), name: displayName(), role: role, title: role === "adult" ? displayName() : displayName(), date: "08-19", registered: true, logs: false });
+    }
+    renderMembers();
+  }
+
+  function showResult(success) {
+    stopTimer();
+    var role = state.draft.role || "child";
+    var name = displayName() || "乐乐";
+    $("resultIcon").className = "result-icon " + (success ? "success" : "fail");
+    $("resultIcon").innerHTML = success
+      ? '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>'
+      : '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>';
+    $("resultTitle").textContent = success ? "声纹注册成功" : "注册未完成";
+    $("resultSub").textContent = success ? "小乐已经记住这位家庭成员的声音" : "没有关系，可以调整环境后重新试一次";
+    $("resultAvatar").outerHTML = avatar(role, "lg");
+    $("resultProfileName").textContent = "已为「" + name + "」建档";
+    $("resultProfileMeta").textContent = (role === "child" ? "儿童" : "成人") + " · 2026-08-19";
+    $("failReasons").classList.toggle("hidden", success);
+    $("successTip").classList.toggle("hidden", !success);
+    $("doneBtn").classList.toggle("hidden", !success);
+    $("againBtn").classList.toggle("hidden", !success);
+    $("retryBtn").classList.toggle("hidden", success);
+    $("backListBtn").classList.toggle("hidden", success);
+    if (success) applyEnrollment();
+    go("p4");
+  }
+
+  function showToast(text, withUndo) {
+    $("toastText").textContent = text;
+    $("undoToast").classList.toggle("hidden", !withUndo);
+    $("toast").classList.remove("hidden");
+    if (state.toastTimer) clearTimeout(state.toastTimer);
+    state.toastTimer = setTimeout(function () { $("toast").classList.add("hidden"); }, 5000);
+  }
+
+  function openDelete(id) {
+    var m = state.members.find(function (x) { return x.id === id; });
+    if (!m) return;
+    state.deleteTarget = m;
+    $("delName").textContent = m.name;
+    $("delLogsNote").classList.toggle("hidden", !m.logs);
+    $("deleteModal").classList.remove("hidden");
+  }
+
+  function confirmDelete() {
+    if (!state.deleteTarget) return;
+    var idx = state.members.indexOf(state.deleteTarget);
+    if (idx < 0) return;
+    state.deletedItem = state.members[idx];
+    state.deletedIndex = idx;
+    state.members.splice(idx, 1);
+    renderMembers();
+    $("deleteModal").classList.add("hidden");
+    showToast("已删除「" + state.deletedItem.name + "」的声纹", true);
+    state.deleteTarget = null;
+  }
+
+  function undoDelete() {
+    if (!state.deletedItem) return;
+    state.members.splice(Math.min(state.deletedIndex, state.members.length), 0, state.deletedItem);
+    state.deletedItem = null;
+    renderMembers();
+    $("toast").classList.add("hidden");
+  }
+
+  function switchTab(name) {
+    state.tab = name;
+    document.querySelectorAll(".tab-btn").forEach(function (b) { b.classList.toggle("active", b.dataset.tab === name); });
+    document.querySelectorAll(".tab-section").forEach(function (s) { s.classList.toggle("active", s.id === "tab-" + name); });
+  }
+
+  var dollStates = {
+    d1: [
+      { id: "d1-idle", title: "待机", sub: "等待小程序下发注册指令" },
+      { id: "d1-guide", title: "引导播报", sub: "叮咚 · 我是小乐！请跟我读一句话～" },
+      { id: "d1-recording", title: "采集中", sub: "监听麦克风，每 5s 上报有效进度" },
+      { id: "d1-noise", title: "噪音提示", sub: "有点吵哦，请安静一点，我们再试一次～" },
+      { id: "d1-success", title: "采集成功", sub: "收到啦！你的声音我记住啦～" },
+      { id: "d1-fail", title: "超时 / 失败", sub: "没关系，稍后再试吧" }
+    ],
+    d2: [
+      { id: "d2-idle", title: "待机", sub: "等待唤醒词「小乐小乐」" },
+      { id: "d2-wake", title: "唤醒识别", sub: "音频送入 1:N 声纹辨认侧车" },
+      { id: "d2-child", title: "儿童路由", sub: "乐乐你好呀！今天想聊恐龙还是积木？" },
+      { id: "d2-adult", title: "成人路由", sub: "妈妈您好！今天有什么想聊的吗？" },
+      { id: "d2-guest", title: "访客路由", sub: "你好呀，我是小乐，很高兴见到你！" },
+      { id: "d2-end", title: "对话结束", sub: "日志带角色标签入库" }
+    ]
+  };
+  var dollBubbles = {
+    "d1-idle": "我在待机，等你来注册声音～",
+    "d1-guide": "叮咚！我是小乐！请跟我读一句话～",
+    "d1-recording": "正在认真听，请用平时的声音说话～",
+    "d1-noise": "有点吵哦，请安静一点，我们再试一次～",
+    "d1-success": "收到啦！你的声音我记住啦～",
+    "d1-fail": "没关系，稍后再试吧。",
+    "d2-idle": "叫我「小乐小乐」就能开始聊天～",
+    "d2-wake": "我在呢！让我听听是谁在叫我～",
+    "d2-child": "乐乐你好呀！今天想聊恐龙还是积木？",
+    "d2-adult": "妈妈您好！今天有什么想聊的吗？",
+    "d2-guest": "你好呀，我是小乐，很高兴见到你！",
+    "d2-end": "今天聊得很开心，下次再见～"
+  };
+
+  function renderDollStates() {
+    var list = dollStates[state.dollMode] || dollStates.d1;
+    $("dollStateList").innerHTML = list.map(function (s) {
+      return '<button class="state-row ' + (s.id === state.dollState ? "active" : "") + '" data-doll-state="' + s.id + '" type="button"><span class="snum">' + (list.indexOf(s) + 1) + '</span><span class="stext"><b>' + s.title + '</b><span>' + s.sub + '</span></span></button>';
+    }).join("");
+    $("dollBubble").textContent = dollBubbles[state.dollState] || "";
+    $("modeD1").classList.toggle("active", state.dollMode === "d1");
+    $("modeD2").classList.toggle("active", state.dollMode === "d2");
+  }
+
+  document.addEventListener("click", function (e) {
+    var delBtn = e.target.closest("[data-del]");
+    if (delBtn) { openDelete(delBtn.dataset.del); return; }
+    var regBtn = e.target.closest("[data-register]");
+    if (regBtn) {
+      var member = state.members.find(function (m) { return m.id === regBtn.dataset.register; });
+      enterP2("renew", member);
+      return;
+    }
+    var gotoBtn = e.target.closest("[data-goto]");
+    if (gotoBtn) {
+      var target = gotoBtn.dataset.goto;
+      if (target === "p2") { enterP2("add"); return; }
+      if (target === "p3") { startRecording(); return; }
+      if (target === "p4") { showResult(true); return; }
+      go(target);
+      return;
+    }
+    var roleBtn = e.target.closest(".role-card");
+    if (roleBtn) {
+      state.draft.role = roleBtn.dataset.role;
+      state.draft.name = "";
+      state.draft.custom = false;
+      state.draft.title = "";
+      syncP2();
+      return;
+    }
+    var titleBtn = e.target.closest(".chip-choice");
+    if (titleBtn) {
+      var t = titleBtn.dataset.title;
+      state.draft.custom = t === "自定义";
+      state.draft.title = state.draft.custom ? "" : t;
+      state.draft.name = "";
+      syncP2();
+      return;
+    }
+    var thumb = e.target.closest(".thumb");
+    if (thumb) {
+      var gt = thumb.dataset.goto;
+      if (gt === "p2") { enterP2("add"); return; }
+      if (gt === "p3") { startRecording(); return; }
+      if (gt === "p4") { showResult(true); return; }
+      go(gt);
+      return;
+    }
+    var tabBtn = e.target.closest(".tab-btn");
+    if (tabBtn) { switchTab(tabBtn.dataset.tab); return; }
+    var stateBtn = e.target.closest("[data-doll-state]");
+    if (stateBtn) { state.dollState = stateBtn.dataset.dollState; renderDollStates(); return; }
+  });
+
+  $("topAddBtn").addEventListener("click", function () { enterP2("add"); });
+  $("addMemberBtn").addEventListener("click", function () { enterP2("add"); });
+  $("backToP1").addEventListener("click", function () { go("p1"); });
+  $("backToP2").addEventListener("click", function () {
+    stopTimer();
+    go("p2");
+  });
+  $("visitorRow").addEventListener("click", function () { $("visitorSheet").classList.remove("hidden"); });
+  $("closeVisitor").addEventListener("click", function () { $("visitorSheet").classList.add("hidden"); });
+  $("visitorSheet").addEventListener("click", function (e) { if (e.target === this) this.classList.add("hidden"); });
+
+  $("deviceCheck").addEventListener("change", function () {
+    state.deviceConfirmed = this.checked;
+    syncStartBtn();
+  });
+  $("nicknameInput").addEventListener("input", function () {
+    state.draft.name = this.value;
+    syncStartBtn();
+  });
+  $("customTitleInput").addEventListener("input", function () {
+    state.draft.name = this.value;
+    syncStartBtn();
+  });
+
+  $("startBtn").addEventListener("click", function () {
+    var d = state.draft;
+    if (!d.role) { showP2Error("请选择成员角色"); return; }
+    if (d.role === "child") {
+      var n = d.name.trim();
+      if (n.length < 2 || n.length > 8) { showP2Error("小名需为 2-8 个字"); return; }
+      var dup = state.members.some(function (m) { return m.role === "child" && m.name === n; });
+      if (dup) { showP2Error("家庭内已存在同名成员"); return; }
+    } else {
+      if (d.custom) {
+        var c = d.name.trim();
+        if (c.length < 2 || c.length > 6) { showP2Error("称谓需为 2-6 个字"); return; }
+      } else if (!d.title) {
+        showP2Error("请选择称谓");
+        return;
+      }
+      var dup2 = state.members.some(function (m) { return m.role === "adult" && (m.name === d.title || (d.custom && m.name === d.name.trim())); });
+      if (dup2 && state.flowMode !== "renew") { showP2Error("家庭内已存在同名成员"); return; }
+    }
+    if (!state.deviceOnline) { showP2Error("请确认玩偶已开机联网"); return; }
+    if (!state.deviceConfirmed) { showP2Error("请先确认玩偶已开机并联网"); return; }
+    startRecording();
+  });
+
+  $("pauseBtn").addEventListener("click", function () {
+    if (state.noise) return;
+    state.paused = !state.paused;
+    syncP3();
+  });
+  $("resumeBtn").addEventListener("click", function () {
+    state.noise = false;
+    state.paused = false;
+    syncP3();
+  });
+  $("restartBtn").addEventListener("click", function () {
+    state.progress = 0;
+    state.noise = false;
+    state.paused = false;
+    syncP3();
+  });
+  $("playSampleBtn").addEventListener("click", function () {
+    showToast("已播放标准音频示例", false);
+  });
+
+  $("doneBtn").addEventListener("click", function () { go("p1"); });
+  $("againBtn").addEventListener("click", function () { startRecording(); });
+  $("retryBtn").addEventListener("click", function () { startRecording(); });
+  $("backListBtn").addEventListener("click", function () { go("p1"); });
+
+  $("cancelDelete").addEventListener("click", function () { $("deleteModal").classList.add("hidden"); state.deleteTarget = null; });
+  $("deleteModal").addEventListener("click", function (e) { if (e.target === this) { this.classList.add("hidden"); state.deleteTarget = null; } });
+  $("confirmDelete").addEventListener("click", confirmDelete);
+  $("undoToast").addEventListener("click", undoDelete);
+
+  $("onlineSwitch").addEventListener("click", function () {
+    state.deviceOnline = !state.deviceOnline;
+    if (!state.deviceOnline) {
+      state.deviceConfirmed = false;
+      $("deviceCheck").checked = false;
+    }
+    updateDeviceUI();
+  });
+  $("simNoiseBtn").addEventListener("click", function () {
+    if (state.page !== "p3") startRecording();
+    state.paused = true;
+    state.noise = true;
+    syncP3();
+  });
+  $("simSuccessBtn").addEventListener("click", function () {
+    if (state.page !== "p3") startRecording();
+    state.progress = 30;
+    stopTimer();
+    showResult(true);
+  });
+  $("simFailBtn").addEventListener("click", function () {
+    if (state.page !== "p3") startRecording();
+    stopTimer();
+    showResult(false);
+  });
+  $("resetDemoBtn").addEventListener("click", function () {
+    stopTimer();
+    state.members = [
+      { id: "mama", name: "妈妈", role: "adult", title: "妈妈", date: "08-12", registered: true, logs: true },
+      { id: "baba", name: "爸爸", role: "adult", title: "爸爸", date: null, registered: false, logs: false }
+    ];
+    state.progress = 0;
+    state.paused = false;
+    state.noise = false;
+    state.deleteTarget = null;
+    state.deletedItem = null;
+    state.deviceOnline = true;
+    state.deviceConfirmed = false;
+    $("deviceCheck").checked = false;
+    $("toast").classList.add("hidden");
+    $("deleteModal").classList.add("hidden");
+    $("visitorSheet").classList.add("hidden");
+    renderMembers();
+    updateDeviceUI();
+    go("p1");
+  });
+
+  $("modeD1").addEventListener("click", function () {
+    state.dollMode = "d1";
+    state.dollState = "d1-idle";
+    renderDollStates();
+  });
+  $("modeD2").addEventListener("click", function () {
+    state.dollMode = "d2";
+    state.dollState = "d2-idle";
+    renderDollStates();
+  });
+
+  renderMembers();
+  updateDeviceUI();
+  syncP2();
+  renderDollStates();
+  go("p1");
+})();
+</script>
+</body>
+</html>

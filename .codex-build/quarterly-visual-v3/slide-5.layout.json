@@ -1,0 +1,6 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/i107q5of","index":4,"layout":{"id":"ly/p83mt83u","name":"标题和内容"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/k7mxovud","kind":"textbox","name":"标题 1","position":{"left":88,"top":38.33,"width":1104,"height":139.17},"text":"1.2 对话速度优化专项","style":{"fontSize":58.67,"typeface":"Arial","color":"#000000","alignment":"left"}},
+{"id":"sh/58vehgvy","kind":"textbox","position":{"left":90,"top":168,"width":1090,"height":42},"text":"围绕“听不清”和“响应慢”两类问题，缩短处理链路并提高端侧稳定性","style":{"fontSize":20,"typeface":"Arial","color":"#166534","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"tb/dofqx8ny","kind":"table","position":{"left":88,"top":225,"width":1104,"height":385},"text":"优化层\t具体调整\t变化\n固件端\t优化收音阈值，调整唤醒词逻辑\t提升收音与唤醒稳定性\n上下文策略\t召回轮次由20轮调整为5轮\t处理轮次减少75%\n提示词\t人格生成提示词优化；约4000字符压缩至约600字符\t提示词长度减少约85%\n服务端链路\t意图路由增加前置判断，优化资源预加载\t减少无效处理与等待","rows":5,"cols":3}
+]}

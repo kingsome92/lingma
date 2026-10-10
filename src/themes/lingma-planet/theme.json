@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "kind": "user-confirmed-and-reference-images",
+    "detail": "品牌色彩视觉规范、灵玛星球成长中心与设备管理参考图、现有原型",
+    "capturedAt": "2026-10-10",
+    "designFile": "./DESIGN.md"
+  },
+  "identity": {
+    "slug": "lingma-planet",
+    "titleZh": "灵玛星球",
+    "descriptionZh": "面向亲子陪伴与智能设备管理的温暖移动端主题"
+  },
+  "tags": ["亲子陪伴", "移动端", "智能设备", "自然绿", "微信小程序"],
+  "assets": {
+    "tokens": "./assets/tokens.json",
+    "brandColorSpec": "./assets/brand-color-spec.png",
+    "deviceReference": "./assets/device-management-reference.png",
+    "growthReference": "./assets/growth-center-reference.png"
+  },
+  "tokens": {
+    "palette": {
+      "primary": "#52C873",
+      "primaryStrong": "#3DAA5E",
+      "primaryDark": "#2C7A43",
+      "primarySoft": "#F3FAF5",
+      "accent": "#F5A171",
+      "accentStrong": "#D97A45",
+      "accentSoft": "#FFF6F0",
+      "background": "#F7F9F8",
+      "surface": "#FFFFFF",
+      "border": "#E3E8E5",
+      "text": "#2F3432",
+      "muted": "#6F7672",
+      "subtle": "#9FA7A3",
+      "reward": "#F7B100"
+    },
+    "typography": {
+      "fontFamily": "-apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif",
+      "title1": "20px",
+      "body1": "16px",
+      "body2": "14px",
+      "button": "16px",
+      "caption": "12px"
+    },
+    "radius": {
+      "switch": "25px",
+      "pill": "18px",
+      "modalAction": "28px",
+      "card": "20px",
+      "modal": "20px",
+      "input": "12px"
+    },
+    "spacing": {
+      "unit": "4px",
+      "pageX": "16px",
+      "card": "16px",
+      "section": "24px",
+      "touchTarget": "44px"
+    },
+    "components": {
+      "switch": "50x30px",
+      "capsule": "36px height",
+      "badge": "20px height",
+      "modal": "320px width"
+    }
+  },
+  "previewImages": [
+    { "type": "brand-color-spec", "url": "./assets/brand-color-spec.png" },
+    { "type": "product-screenshot", "url": "./assets/growth-center-reference.png" },
+    { "type": "product-screenshot", "url": "./assets/device-management-reference.png" }
+  ],
+  "display": {
+    "palette": [
+      { "color": "#52C873", "labelZh": "品牌主色", "labelEn": "Primary Green", "textColor": "#1F2321" },
+      { "color": "#3DAA5E", "labelZh": "品牌强调", "labelEn": "Strong Green", "textColor": "#FFFFFF" },
+      { "color": "#F5A171", "labelZh": "情绪强调", "labelEn": "Emotion Orange", "textColor": "#1F2321" },
+      { "color": "#F7F9F8", "labelZh": "页面背景", "labelEn": "Background", "textColor": "#1F2321" },
+      { "color": "#FFFFFF", "labelZh": "卡片表面", "labelEn": "Surface", "textColor": "#1F2321" },
+      { "color": "#2F3432", "labelZh": "标题正文", "labelEn": "Text", "textColor": "#FFFFFF" },
+      { "color": "#E3E8E5", "labelZh": "分割边框", "labelEn": "Border", "textColor": "#1F2321" },
+      { "color": "#F7B100", "labelZh": "可选奖励", "labelEn": "Reward Yellow", "textColor": "#1F2321" }
+    ],
+    "typography": ["PingFang SC / Microsoft YaHei", "PingFang SC / Microsoft YaHei", "ui-monospace"],
+    "radius": { "control": "12px", "card": "20px", "preview": "20px", "pill": "28px", "source": "design-md" },
+    "spacing": { "基准": "4px", "页面左右": "16px", "卡片内边距": "16px", "分区": "24px" },
+    "borders": [
+      { "label": "分割线", "value": "1px #E3E8E5", "cssValue": "#E3E8E5", "description": "卡片和导航之间的低对比边界" },
+      { "label": "聚焦环", "value": "2px #7EDC8B", "cssValue": "#7EDC8B", "description": "键盘和辅助操作的可见焦点" }
+    ],
+    "shadows": [
+      { "label": "Raised", "value": "0 4px 14px rgba(47,52,50,.06)", "cssValue": "0 4px 14px rgba(47,52,50,.06)", "description": "身份卡和工具面板" },
+      { "label": "Floating", "value": "0 10px 24px rgba(47,52,50,.10)", "cssValue": "0 10px 24px rgba(47,52,50,.10)", "description": "客服入口和浮层菜单" },
+      { "label": "Modal", "value": "0 18px 40px rgba(31,35,33,.16)", "cssValue": "0 18px 40px rgba(31,35,33,.16)", "description": "弹窗和关键浮层" }
+    ],
+    "panels": [
+      { "title": "成长摘要卡", "eyebrow": "首页模块", "body": "用温暖插画和清晰层级呈现孩子的成长状态与下一步行动。" },
+      { "title": "设备身份卡", "eyebrow": "硬件模块", "body": "突出设备名称、绑定关系和当前状态，主操作保持一眼可见。" },
+      { "title": "设置分组", "eyebrow": "配置模块", "body": "按基础设置、参数和系统信息分组，减少认知负担。" },
+      { "title": "状态反馈", "eyebrow": "交互模块", "body": "使用绿色、橙色和中性色组合表达连接、提醒、禁用和完成状态。" }
+    ],
+    "usageGuidance": {
+      "do": ["使用绿色表达主要操作和积极状态。", "用白色卡片承载设置分组，保持 16px 以上留白。", "让弹窗操作使用 36px 高的 16px 胶囊按钮。", "为开关、徽标和触控目标提供明确尺寸。"],
+      "dont": ["不要把 50×30px 开关规格用于所有按钮。", "不要用橙色替代主要提交操作。", "不要使用强渐变、厚描边或重阴影。", "不要用颜色单独表达设备状态。"]
+    }
+  }
+}

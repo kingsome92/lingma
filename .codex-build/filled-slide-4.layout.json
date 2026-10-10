@@ -1,0 +1,5 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/jyx0ra1s","index":3,"layout":{"id":"ly/p83mt83u","name":"标题和内容"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/5cva1cfq","kind":"textbox","name":"标题 1","position":{"left":88,"top":38.33,"width":1104,"height":139.17},"text":"2. 三季度工作总结 - 技术突破","style":{"fontSize":58.67,"typeface":"Arial","color":"#000000","alignment":"left"}},
+{"id":"sh/i94r6xgz","kind":"textbox","name":"内容占位符 2","position":{"left":88,"top":191.67,"width":1104,"height":456.83},"text":"对话速度优化专项：聚焦听不清、响应慢两类问题\n固件端：优化收音阈值，调整唤醒词逻辑\n服务端：上下文召回由20轮降至5轮，人格提示词优化\n提示词重构：由4000余字符压缩至600余字符\n增加意图路由前置判断，优化资源预加载\n稳定性兜底：弱网重连、程序看门狗、深度睡眠唤醒优化","style":{"fontSize":24.51,"typeface":"Arial","color":"#000000","alignment":"left"}}
+]}

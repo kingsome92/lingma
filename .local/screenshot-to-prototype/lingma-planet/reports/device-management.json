@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "input": "D:\\Codex\\养娃乐产品\\.local\\screenshot-to-prototype\\lingma-planet\\sources\\device-management.png",
+  "sha256": "5cd25767f7da35a82fca60cbd7aae522cdb5a6236ddd845e24aeed845785f87e",
+  "width": 1080,
+  "height": 3451,
+  "dimensions": {
+    "width": 1080,
+    "height": 3451
+  },
+  "viewport": {
+    "width": 1080,
+    "height": 3451,
+    "deviceScaleFactor": 1
+  },
+  "color": {
+    "sampledPixels": 3727080,
+    "meanRgb": [
+      246,
+      247,
+      247
+    ],
+    "meanHex": "#f6f7f7",
+    "dominant": [
+      {
+        "hex": "#f8f8f8",
+        "rgb": [
+          248,
+          248,
+          248
+        ],
+        "pixels": 3543468,
+        "ratio": 0.9507356965774816
+      },
+      {
+        "hex": "#d8d8d8",
+        "rgb": [
+          216,
+          216,
+          216
+        ],
+        "pixels": 24012,
+        "ratio": 0.006442577030812325
+      },
+      {
+        "hex": "#484848",
+        "rgb": [
+          72,
+          72,
+          72
+        ],
+        "pixels": 23123,
+        "ratio": 0.006204052502226945
+      },
+      {
+        "hex": "#c8c8c8",
+        "rgb": [
+          200,
+          200,
+          200
+        ],
+        "pixels": 21476,
+        "ratio": 0.0057621516039365935
+      },
+      {
+        "hex": "#e8e8e8",
+        "rgb": [
+          232,
+          232,
+          232
+        ],
+        "pixels": 16031,
+        "ratio": 0.00430122240467068
+      },
+      {
+        "hex": "#383838",
+        "rgb": [
+          56,
+          56,
+          56
+        ],
+        "pixels": 14138,
+        "ratio": 0.003793318093520933
+      },
+      {
+        "hex": "#686868",
+        "rgb": [
+          104,
+          104,
+          104
+        ],
+        "pixels": 13983,
+        "ratio": 0.003751730577288387
+      },
+      {
+        "hex": "#585858",
+        "rgb": [
+          88,
+          88,
+          88
+        ],
+        "pixels": 9627,
+        "ratio": 0.002582987217875656
+      }
+    ]
+  },
+  "alpha": {
+    "hasAlphaChannel": false,
+    "transparentPixels": 0,
+    "translucentPixels": 0,
+    "opaquePixels": 3727080,
+    "transparentRatio": 0,
+    "translucentRatio": 0,
+    "opaqueRatio": 1,
+    "meanAlpha": 255
+  }
+}

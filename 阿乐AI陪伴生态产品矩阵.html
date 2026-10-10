@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阿乐 AI 陪伴生态 · 产品矩阵知识图谱</title>
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  background: #eef1f4;
+  color: #182230;
+  letter-spacing: 0;
+}
+.app { max-width: 1600px; margin: 0 auto; padding: 18px 22px 30px; }
+.app-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark { width: 44px; height: 44px; border-radius: 8px; background: #6366f1; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; }
+.brand h1 { margin: 0; font-size: 20px; font-weight: 700; }
+.brand p { margin: 2px 0 0; font-size: 12.5px; color: #667085; }
+.header-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill { background: #fff; border: 1px solid #dfe5ea; color: #475467; font-size: 12px; padding: 6px 10px; border-radius: 8px; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: #fff; border: 1px solid #dfe5ea; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; }
+.filter-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.filter-label { font-size: 12px; color: #667085; font-weight: 600; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { appearance: none; border: 1px solid #d0d7de; background: #fff; color: #344054; font: inherit; font-size: 12.5px; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+.chip:hover { border-color: #98a2b3; }
+.chip[aria-pressed="true"] { background: #182230; border-color: #182230; color: #fff; }
+.actions { display: flex; gap: 8px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid #d0d7de; background: #fff; color: #344054; font: inherit; font-size: 13px; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+.btn:hover { border-color: #98a2b3; }
+.btn.primary { background: #6366f1; border-color: #6366f1; color: #fff; }
+.btn.primary:hover { background: #5458e4; }
+.btn:disabled { opacity: .6; cursor: default; }
+.btn svg { width: 16px; height: 16px; }
+.insight-bar { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #dfe5ea; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; }
+.insight-icon { width: 34px; height: 34px; border-radius: 8px; background: #eef0ff; color: #6366f1; display: flex; align-items: center; justify-content: center; font-size: 16px; flex: none; }
+.insight-title { font-size: 14.5px; font-weight: 700; }
+.insight-desc { font-size: 12.5px; color: #667085; margin-top: 2px; }
+.graph-shell { background: #fff; border: 1px solid #dfe5ea; border-radius: 8px; padding: 10px; }
+.graph-shell:fullscreen { background: #fff; padding: 16px; }
+.graph-scroll { overflow: auto; }
+.graph-canvas { min-width: 1180px; }
+#graph { display: block; width: 100%; height: auto; aspect-ratio: 1800 / 1810; }
+.legend { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 12px; padding: 0 4px; }
+.legend-block { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 12px; color: #475467; }
+.legend-title { font-weight: 700; color: #344054; }
+.legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.legend-item i { width: 12px; height: 12px; border-radius: 3px; border: 1px solid transparent; display: inline-block; }
+.legend-item .line { height: 0; border: 0; border-top: 2px solid; width: 18px; }
+.legend-item .line.solid { border-top-style: solid; }
+.legend-item .line.dashed { border-top-style: dashed; }
+.legend-item .line.arrow { border-top: 2px solid #7a8699; position: relative; }
+.legend-item .line.arrow::after { content: ''; position: absolute; right: -3px; top: -5px; border-left: 6px solid #7a8699; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+
+#graph .dim { opacity: .16; }
+#graph .cell { cursor: pointer; }
+#graph .cell rect.bg,
+#graph .engine-node > rect:first-child,
+#graph .layer-group > rect:first-child,
+#graph .product-group > rect:first-child,
+#graph .engine-header > rect:first-child { transition: stroke-width .18s ease; }
+#graph .cell:hover rect.bg { stroke-width: 2.8; }
+#graph .cell.focus rect.bg { stroke-width: 2.8; }
+#graph .engine-node.focus > rect:first-child { stroke-width: 2.8; }
+#graph .layer-group.focus > rect:first-child { stroke-width: 2.8; }
+#graph .product-group.focus > rect:first-child { stroke-width: 2.8; }
+#graph .engine-header.dim { opacity: .2; }
+
+@media (max-width: 760px) {
+  .app { padding: 12px 10px 20px; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .actions { justify-content: flex-end; }
+}
+@media print {
+  .toolbar, .legend, .header-meta { display: none; }
+  .app { max-width: none; padding: 0; }
+  .graph-shell { border: 0; padding: 0; }
+  .graph-scroll { overflow: visible; }
+  .graph-canvas { min-width: 0; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">阿</div>
+      <div>
+        <h1>阿乐 AI 陪伴生态</h1>
+        <p>产品矩阵 · 知识图谱</p>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="pill">5 大层级</span>
+      <span class="pill">5 款硬件产品</span>
+      <span class="pill">4 个 AI 引擎节点</span>
+      <span class="pill">48 项能力</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar" aria-label="筛选与操作">
+      <div class="filter-group">
+        <span class="filter-label">层级</span>
+        <div id="layerChips" class="chips"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">产品</span>
+        <div id="productChips" class="chips"></div>
+      </div>
+      <div class="actions">
+        <button id="resetBtn" class="btn" type="button" aria-label="还原全部视图">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          还原
+        </button>
+        <button id="fullscreenBtn" class="btn" type="button" aria-label="全屏查看图谱">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          全屏
+        </button>
+        <button id="exportBtn" class="btn primary" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          导出 PNG
+        </button>
+      </div>
+    </section>
+
+    <section class="insight-bar" aria-live="polite">
+      <div class="insight-icon" aria-hidden="true">◈</div>
+      <div>
+        <div class="insight-title" id="insightTitle">全貌 · 从陪伴到成长的价值递进</div>
+        <div class="insight-desc" id="insightDesc">5 个层级纵向递进 · 5 款硬件产品横向覆盖 · AI 成长引擎沉淀数据并回传成长任务</div>
+      </div>
+    </section>
+
+    <section class="graph-shell" id="graphShell">
+      <div class="graph-scroll">
+        <div class="graph-canvas">
+          <svg id="graph" role="img" aria-label="阿乐AI陪伴生态产品矩阵知识图谱"></svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="legend" aria-label="图例">
+      <div class="legend-block">
+        <span class="legend-title">层级</span>
+        <span class="legend-item"><i style="background:#DCEAFB;border-color:#8FB8E8"></i>存在</span>
+        <span class="legend-item"><i style="background:#DFF5DF;border-color:#8ACF8C"></i>互动</span>
+        <span class="legend-item"><i style="background:#FFE2E8;border-color:#EFA3B3"></i>情感</span>
+        <span class="legend-item"><i style="background:#D8F4EE;border-color:#5FC1AC"></i>理解</span>
+        <span class="legend-item"><i style="background:#FFF1D6;border-color:#E7B94A"></i>成长</span>
+      </div>
+      <div class="legend-block">
+        <span class="legend-title">产品</span>
+        <span class="legend-item"><i style="background:#E8590C"></i>玩偶</span>
+        <span class="legend-item"><i style="background:#2F9E44"></i>宠物</span>
+        <span class="legend-item"><i style="background:#1C7ED6"></i>放大镜</span>
+        <span class="legend-item"><i style="background:#9C36B5"></i>包挂</span>
+        <span class="legend-item"><i style="background:#C98A04"></i>徽章</span>
+        <span class="legend-item"><i style="background:#6366F1"></i>AI 引擎</span>
+      </div>
+      <div class="legend-block">
+        <span class="legend-title">关系</span>
+        <span class="legend-item"><i class="line solid"></i>层级归属</span>
+        <span class="legend-item"><i class="line dashed"></i>数据汇入 / 任务回传</span>
+        <span class="legend-item"><i class="line arrow"></i>价值递进</span>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const LAYERS = [
+  { id: 'growth', no: '05', cn: '成长层', en: 'Growth', value: '长期规划 · 驱动成长飞轮', fill: '#FFF1D6', edge: '#E7B94A', accent: '#C26E00', y: 300, h: 300, engine: true },
+  { id: 'understanding', no: '04', cn: '理解层', en: 'Understanding', value: '数据洞察 · 看见真实成长', fill: '#D8F4EE', edge: '#5FC1AC', accent: '#0E8F78', y: 640, h: 300, engine: true },
+  { id: 'emotion', no: '03', cn: '情感层', en: 'Emotion', value: '情感联结 · 滋养安全感', fill: '#FFE2E8', edge: '#EFA3B3', accent: '#D6336C', y: 980, h: 230, engine: false },
+  { id: 'interaction', no: '02', cn: '互动层', en: 'Interaction', value: '双向互动 · 点燃好奇心', fill: '#DFF5DF', edge: '#8ACF8C', accent: '#2F9E44', y: 1250, h: 230, engine: false },
+  { id: 'presence', no: '01', cn: '存在层', en: 'Presence', value: '陪伴在场 · 建立信任', fill: '#DCEAFB', edge: '#8FB8E8', accent: '#2563EB', y: 1520, h: 230, engine: false }
+];
+
+const PRODUCTS = [
+  { id: 'doll', name: 'AI玩偶阿乐', short: '阿乐', color: '#E8590C' },
+  { id: 'pet', name: '电子宠物', short: '宠物', color: '#2F9E44' },
+  { id: 'scope', name: 'AI放大镜', short: '放大镜', color: '#1C7ED6' },
+  { id: 'bag', name: 'AI包挂', short: '包挂', color: '#9C36B5' },
+  { id: 'badge', name: '电子徽章', short: '徽章', color: '#C98A04' }
+];
+
+const CELLS = {
+  presence: {
+    doll: ['睡眠陪伴', '日常聊天', '情绪安抚'],
+    pet: ['随身陪伴', '情绪寄托'],
+    bag: ['校园随行', '出行陪伴']
+  },
+  interaction: {
+    doll: ['对话', '故事', '游戏'],
+    scope: ['植物识别', '昆虫识别', '英语启蒙', '科普探索'],
+    badge: ['任务打卡', '成就展示', '社交交换'],
+    bag: ['唤醒互动', '语音问答', '触摸反馈']
+  },
+  emotion: {
+    doll: ['情绪识别', '安慰鼓励', '陪伴成长'],
+    pet: ['喂养养成', '责任感培养'],
+    bag: ['心情记录', '情绪灯效'],
+    badge: ['好习惯奖励', '成长勋章']
+  }
+};
+
+const ENGINE = [
+  { id: 'parent', name: '家长端', en: 'Parent App', layer: 'understanding', slot: 'upper', items: ['情绪分析', '兴趣画像', '能力画像', '成长报告'] },
+  { id: 'dc', name: '成长数据中心', en: 'Growth Data Hub', layer: 'understanding', slot: 'lower', items: ['对话数据', '情绪数据', '探索数据', '任务数据', '社交数据'] },
+  { id: 'agent', name: 'AI成长Agent', en: 'Growth Agent', layer: 'growth', slot: 'upper', items: ['成长规划', '个性化任务', '动态激励', '家校协同'] },
+  { id: 'os', name: '家长端成长OS', en: 'Growth OS', layer: 'growth', slot: 'lower', items: ['阅读能力', '表达能力', '科学素养', '英语启蒙', '习惯养成', '社交能力'] }
+];
+
+const W = 1800, H = 1810;
+const MX = 270, COL_W = 200, COL_GAP = 16;
+const EX = 1370, EW = 370;
+const BUS_Y = 196;
+const HEADER_Y = 226, HEADER_H = 40;
+const ROOT = { x: 560, y: 30, w: 680, h: 86 };
+
+function layerById(id) { return LAYERS.find(l => l.id === id); }
+function prodById(id) { return PRODUCTS.find(p => p.id === id); }
+function colX(i) { return MX + i * (COL_W + COL_GAP); }
+function colCenter(i) { return colX(i) + COL_W / 2; }
+function nodeH(items) { return 44 + 36 * Math.ceil(items.length / 2); }
+function nodeY(layer, slot) { return slot === 'upper' ? layer.y + 22 : layer.y + 148; }
+
+function buildSVG() {
+  const p = [];
+  p.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="阿乐AI陪伴生态产品矩阵知识图谱">');
+  p.push('<defs>'
+    + '<marker id="arrowUp" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 10 L5 0 L10 10" fill="none" stroke="#7A8699" stroke-width="1.6" stroke-linejoin="round"/></marker>'
+    + '<marker id="arrowFlow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 10 L5 0 L10 10" fill="#6366F1" stroke="#6366F1" stroke-width="1.4" stroke-linejoin="round"/></marker>'
+    + '<marker id="arrowFeed" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 10 L5 0 L10 10" fill="#C26E00" stroke="#C26E00" stroke-width="1.4" stroke-linejoin="round"/></marker>'
+    + '</defs>');
+  p.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="#FFFFFF"/>');
+
+  p.push('<g class="root-node">'
+    + '<rect x="' + ROOT.x + '" y="' + ROOT.y + '" width="' + ROOT.w + '" height="' + ROOT.h + '" rx="8" fill="#FFFFFF" stroke="#D3DAE2" stroke-width="1.5"/>'
+    + '<rect x="' + (ROOT.x + 18) + '" y="' + (ROOT.y + 17) + '" width="52" height="52" rx="8" fill="#6366F1"/>'
+    + '<text x="' + (ROOT.x + 44) + '" y="' + (ROOT.y + 50) + '" text-anchor="middle" font-size="26" font-weight="600" fill="#FFFFFF">阿</text>'
+    + '<text x="' + (ROOT.x + 90) + '" y="' + (ROOT.y + 38) + '" font-size="30" font-weight="700" fill="#182230">阿乐 AI 陪伴生态</text>'
+    + '<text x="' + (ROOT.x + 90) + '" y="' + (ROOT.y + 66) + '" font-size="14" fill="#6B7280">产品矩阵 · 知识图谱 · 从陪伴到成长的价值飞轮</text>'
+    + '<text x="' + (ROOT.x + ROOT.w - 18) + '" y="' + (ROOT.y + 44) + '" text-anchor="end" font-size="12" fill="#98A2B3">Root</text>'
+    + '</g>');
+  p.push('<line x1="900" y1="116" x2="900" y2="196" stroke="#C3CBD4" stroke-width="1.5"/>');
+  p.push('<line x1="138" y1="196" x2="1740" y2="196" stroke="#C3CBD4" stroke-width="1.5"/>');
+
+  PRODUCTS.forEach(function (prod, i) {
+    const cx = colCenter(i);
+    p.push('<line x1="' + cx + '" y1="196" x2="' + cx + '" y2="226" stroke="#D3DAE2" stroke-width="1.2"/>');
+    p.push('<g class="product-group" data-product="' + prod.id + '">'
+      + '<rect x="' + (colX(i) + 8) + '" y="226" width="184" height="40" rx="8" fill="' + prod.color + '"/>'
+      + '<text x="' + cx + '" y="251" text-anchor="middle" font-size="15" font-weight="600" fill="#FFFFFF">' + prod.name + '</text>'
+      + '<line x1="' + cx + '" y1="266" x2="' + cx + '" y2="1750" stroke="' + prod.color + '" stroke-width="1" stroke-dasharray="3 8" opacity="0.28"/>'
+      + '</g>');
+  });
+
+  p.push('<line x1="1364" y1="196" x2="1364" y2="226" stroke="#A5B4FC" stroke-width="1.2" stroke-dasharray="3 4"/>');
+  p.push('<g class="engine-header">'
+    + '<rect x="1370" y="226" width="370" height="40" rx="8" fill="#6366F1"/>'
+    + '<text x="1555" y="251" text-anchor="middle" font-size="15" font-weight="600" fill="#FFFFFF">AI 成长引擎 · 理解与规划中枢</text>'
+    + '</g>');
+
+  LAYERS.forEach(function (layer) {
+    const spineY = layer.engine ? layer.y + 143 : layer.y + layer.h / 2;
+    const spineEnd = layer.engine ? 1740 : 1334;
+    p.push('<line x1="250" y1="' + spineY + '" x2="' + spineEnd + '" y2="' + spineY + '" stroke="#C9D2DB" stroke-width="1" stroke-dasharray="6 7" opacity="0.7"/>');
+    p.push('<line x1="241" y1="' + spineY + '" x2="250" y2="' + spineY + '" stroke="#B9C3CE" stroke-width="1.2"/>');
+    p.push(layerLabelSVG(layer));
+
+    if (layer.engine) {
+      p.push(bandSVG(layer));
+      ENGINE.filter(function (n) { return n.layer === layer.id; }).forEach(function (n) { p.push(engineNodeSVG(n)); });
+    } else {
+      PRODUCTS.forEach(function (prod, i) { p.push(cellOrEmptySVG(layer, prod, colX(i))); });
+    }
+  });
+
+  p.push('<line x1="1555" y1="788" x2="1555" y2="778" stroke="#6366F1" stroke-width="2" marker-end="url(#arrowFlow)"/>');
+  p.push('<line x1="1555" y1="662" x2="1555" y2="606" stroke="#6366F1" stroke-width="2" marker-end="url(#arrowFlow)"/>');
+  p.push('<line x1="1555" y1="454" x2="1555" y2="438" stroke="#6366F1" stroke-width="2" marker-end="url(#arrowFlow)"/>');
+
+  p.push('<line x1="22" y1="1760" x2="22" y2="340" stroke="#7A8699" stroke-width="1.6" marker-end="url(#arrowUp)"/>');
+  p.push('<text x="14" y="1040" transform="rotate(-90 14 1040)" text-anchor="middle" font-size="14" fill="#7A8699">价值递进</text>');
+  p.push('<text x="800" y="1792" text-anchor="middle" font-size="13" fill="#8A94A6">硬件产品 · 横向覆盖</text>');
+  p.push('<text x="1555" y="1792" text-anchor="middle" font-size="13" fill="#8A94A6">AI 成长引擎 · 纵向递进</text>');
+
+  p.push('</svg>');
+  return p.join('');
+}
+
+function layerLabelSVG(layer) {
+  const cy = layer.y + layer.h / 2;
+  const y = cy - 56;
+  return '<g class="layer-group" data-layer="' + layer.id + '">'
+    + '<rect x="36" y="' + y + '" width="205" height="112" rx="8" fill="#FFFFFF" stroke="' + layer.accent + '" stroke-width="1.5"/>'
+    + '<circle cx="70" cy="' + (y + 34) + '" r="18" fill="' + layer.accent + '"/>'
+    + '<text x="70" y="' + (y + 40) + '" text-anchor="middle" font-size="14" font-weight="600" fill="#FFFFFF">' + layer.no + '</text>'
+    + '<text x="98" y="' + (y + 34) + '" font-size="20" font-weight="700" fill="#182230">' + layer.cn + '</text>'
+    + '<text x="98" y="' + (y + 55) + '" font-size="12" fill="#6B7280">' + layer.en + '</text>'
+    + '<text x="52" y="' + (y + 90) + '" font-size="13.5" fill="' + layer.accent + '">' + layer.value + '</text>'
+    + '</g>';
+}
+
+function bandSVG(layer) {
+  let out = '<g class="band" data-layer="' + layer.id + '">';
+  out += '<rect x="282" y="' + (layer.y + 24) + '" width="1040" height="' + (layer.h - 48) + '" rx="8" fill="' + layer.fill + '" opacity="0.55" stroke="' + layer.edge + '" stroke-width="1.3" stroke-dasharray="7 7"/>';
+  if (layer.id === 'understanding') {
+    out += '<text x="802" y="' + (layer.y + 118) + '" text-anchor="middle" font-size="19" font-weight="600" fill="' + layer.accent + '">全产品数据汇入</text>';
+    out += '<text x="802" y="' + (layer.y + 148) + '" text-anchor="middle" font-size="14" fill="#52706A">对话 · 情绪 · 探索 · 任务 · 社交</text>';
+    out += '<line x1="1332" y1="' + (layer.y + 86) + '" x2="1368" y2="' + (layer.y + 86) + '" stroke="#0E8F78" stroke-width="2" marker-end="url(#arrowFlow)"/>';
+    out += '<text x="1350" y="' + (layer.y + 76) + '" text-anchor="middle" font-size="12" fill="#0E8F78">数据沉淀</text>';
+  } else {
+    out += '<text x="802" y="' + (layer.y + 118) + '" text-anchor="middle" font-size="19" font-weight="600" fill="' + layer.accent + '">成长计划 · 任务与激励回传</text>';
+    out += '<text x="802" y="' + (layer.y + 148) + '" text-anchor="middle" font-size="14" fill="#7A6232">阅读 · 表达 · 科学 · 英语 · 习惯 · 社交</text>';
+    out += '<line x1="1372" y1="' + (layer.y + 120) + '" x2="1336" y2="' + (layer.y + 120) + '" stroke="#C26E00" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrowFeed)"/>';
+  }
+  out += '</g>';
+  return out;
+}
+
+function cellOrEmptySVG(layer, prod, x) {
+  const items = CELLS[layer.id] ? CELLS[layer.id][prod.id] : null;
+  const cy = layer.y + 16;
+  const ch = layer.h - 32;
+  if (!items) {
+    return '<g class="cell empty" data-layer="' + layer.id + '" data-product="' + prod.id + '">'
+      + '<rect x="' + (x + 6) + '" y="' + cy + '" width="' + (COL_W - 12) + '" height="' + ch + '" rx="8" fill="none" stroke="#D8DEE6" stroke-width="1" stroke-dasharray="5 6" opacity="0.9"/>'
+      + '<circle cx="' + (x + COL_W / 2) + '" cy="' + (cy + ch / 2) + '" r="3" fill="#C6CEDA"/>'
+      + '</g>';
+  }
+  const rows = Math.ceil(items.length / 2);
+  const startY = cy + 52 + Math.max(0, Math.floor((ch - 52 - rows * 34) / 2));
+  let chips = '';
+  items.forEach(function (t, i) {
+    const row = Math.floor(i / 2), col2 = i % 2;
+    const cx = x + 14 + col2 * 88;
+    const cy2 = startY + row * 34;
+    chips += '<rect x="' + cx + '" y="' + cy2 + '" width="82" height="28" rx="8" fill="#FFFFFF" stroke="#D5DCE3" stroke-width="1"/>'
+      + '<text x="' + (cx + 41) + '" y="' + (cy2 + 19) + '" text-anchor="middle" font-size="13" fill="#334155">' + t + '</text>';
+  });
+  return '<g class="cell" data-layer="' + layer.id + '" data-product="' + prod.id + '">'
+    + '<rect class="bg" x="' + (x + 6) + '" y="' + cy + '" width="' + (COL_W - 12) + '" height="' + ch + '" rx="8" fill="' + layer.fill + '" opacity="0.6" stroke="' + layer.edge + '" stroke-width="1.4"/>'
+    + '<rect x="' + (x + 14) + '" y="' + (cy + 12) + '" width="' + (COL_W - 28) + '" height="30" rx="8" fill="' + prod.color + '" opacity="0.94"/>'
+    + '<text x="' + (x + COL_W / 2) + '" y="' + (cy + 32) + '" text-anchor="middle" font-size="14" font-weight="600" fill="#FFFFFF">' + prod.name + '</text>'
+    + chips
+    + '</g>';
+}
+
+function engineNodeSVG(node) {
+  const layer = layerById(node.layer);
+  const h = nodeH(node.items);
+  const y = nodeY(layer, node.slot);
+  const rows = Math.ceil(node.items.length / 2);
+  const startY = y + 48 + Math.max(0, Math.floor((h - 48 - rows * 34 - 8) / 2));
+  let chips = '';
+  node.items.forEach(function (t, i) {
+    const row = Math.floor(i / 2), col2 = i % 2;
+    const cx = EX + 14 + col2 * 176;
+    const cy2 = startY + row * 34;
+    chips += '<rect x="' + cx + '" y="' + cy2 + '" width="166" height="28" rx="8" fill="#F8FAFF" stroke="#C7D2FE" stroke-width="1"/>'
+      + '<text x="' + (cx + 83) + '" y="' + (cy2 + 19) + '" text-anchor="middle" font-size="13" fill="#3730A3">' + t + '</text>';
+  });
+  return '<g class="engine-node" data-layer="' + node.layer + '" data-engine="' + node.id + '">'
+    + '<rect x="' + EX + '" y="' + y + '" width="' + EW + '" height="' + h + '" rx="8" fill="#FFFFFF" stroke="#818CF8" stroke-width="1.6"/>'
+    + '<rect x="' + (EX + 12) + '" y="' + (y + 12) + '" width="8" height="' + (h - 24) + '" rx="4" fill="#6366F1"/>'
+    + '<text x="' + (EX + 32) + '" y="' + (y + 32) + '" font-size="16" font-weight="700" fill="#1E293B">' + node.name + '</text>'
+    + chips
+    + '</g>';
+}
+
+function renderGraph() {
+  const svg = document.getElementById('graph');
+  svg.innerHTML = buildSVG();
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', H);
+}
+
+let selLayer = null;
+let selProduct = null;
+
+function buildChips() {
+  const layerChips = document.getElementById('layerChips');
+  LAYERS.forEach(function (l) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.dataset.layer = l.id;
+    b.setAttribute('aria-pressed', 'false');
+    b.textContent = l.no + ' ' + l.cn;
+    b.addEventListener('click', function () {
+      selLayer = selLayer === l.id ? null : l.id;
+      refreshChips();
+      applyFilters();
+      updateInsight();
+    });
+    layerChips.appendChild(b);
+  });
+  const prodChips = document.getElementById('productChips');
+  PRODUCTS.forEach(function (p) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.dataset.product = p.id;
+    b.setAttribute('aria-pressed', 'false');
+    b.textContent = p.name;
+    b.addEventListener('click', function () {
+      selProduct = selProduct === p.id ? null : p.id;
+      refreshChips();
+      applyFilters();
+      updateInsight();
+    });
+    prodChips.appendChild(b);
+  });
+  const eb = document.createElement('button');
+  eb.type = 'button';
+  eb.className = 'chip';
+  eb.dataset.product = 'engine';
+  eb.setAttribute('aria-pressed', 'false');
+  eb.textContent = 'AI 引擎';
+  eb.addEventListener('click', function () {
+    selProduct = selProduct === 'engine' ? null : 'engine';
+    refreshChips();
+    applyFilters();
+    updateInsight();
+  });
+  prodChips.appendChild(eb);
+}
+
+function refreshChips() {
+  document.querySelectorAll('#layerChips .chip').forEach(function (b) {
+    const on = b.dataset.layer === selLayer;
+    b.setAttribute('aria-pressed', String(on));
+  });
+  document.querySelectorAll('#productChips .chip').forEach(function (b) {
+    const on = b.dataset.product === selProduct;
+    b.setAttribute('aria-pressed', String(on));
+  });
+}
+
+function applyFilters() {
+  const anyLayer = !!selLayer;
+  const anyProd = !!selProduct;
+  document.querySelectorAll('.layer-group').forEach(function (g) {
+    const hit = !anyLayer || g.dataset.layer === selLayer;
+    g.classList.toggle('dim', !hit);
+    g.classList.toggle('focus', anyLayer && hit);
+  });
+  document.querySelectorAll('.product-group').forEach(function (g) {
+    const hit = !anyProd || g.dataset.product === selProduct;
+    g.classList.toggle('dim', !hit);
+    g.classList.toggle('focus', anyProd && hit);
+  });
+  document.querySelectorAll('.cell').forEach(function (c) {
+    const hitLayer = !anyLayer || c.dataset.layer === selLayer;
+    const hitProd = !anyProd || c.dataset.product === selProduct;
+    c.classList.toggle('dim', !(hitLayer && hitProd));
+    c.classList.toggle('focus', (anyLayer || anyProd) && hitLayer && hitProd);
+  });
+  document.querySelectorAll('.engine-node').forEach(function (g) {
+    const hitLayer = !anyLayer || g.dataset.layer === selLayer;
+    const hitEngine = !anyProd || selProduct === 'engine';
+    g.classList.toggle('dim', !(hitLayer && hitEngine));
+    g.classList.toggle('focus', (anyLayer || anyProd) && hitLayer && hitEngine);
+  });
+  document.querySelectorAll('.band').forEach(function (g) {
+    g.classList.toggle('dim', anyLayer && g.dataset.layer !== selLayer);
+  });
+  const eh = document.querySelector('.engine-header');
+  if (eh) eh.classList.toggle('dim', anyProd && selProduct !== 'engine');
+}
+
+function layerStats(layerId) {
+  if (layerById(layerId).engine) {
+    const nodes = ENGINE.filter(function (n) { return n.layer === layerId; });
+    const items = nodes.reduce(function (s, n) { return s + n.items.length; }, 0);
+    return { products: nodes.length, items: items };
+  }
+  let products = 0, items = 0;
+  Object.keys(CELLS[layerId] || {}).forEach(function (pid) {
+    products += 1;
+    items += CELLS[layerId][pid].length;
+  });
+  return { products: products, items: items };
+}
+
+function updateInsight() {
+  const title = document.getElementById('insightTitle');
+  const desc = document.getElementById('insightDesc');
+  if (selLayer && selProduct) {
+    if (selProduct === 'engine') {
+      const nodes = ENGINE.filter(function (n) { return n.layer === selLayer; });
+      const items = nodes.reduce(function (s, n) { return s + n.items.length; }, 0);
+      title.textContent = layerById(selLayer).cn + ' · AI 成长引擎';
+      desc.textContent = nodes.length + ' 个引擎节点 · ' + items + ' 项能力';
+      return;
+    }
+    const items = CELLS[selLayer] ? CELLS[selLayer][selProduct] : null;
+    if (items) {
+      title.textContent = layerById(selLayer).cn + ' · ' + prodById(selProduct).name;
+      desc.textContent = items.length + ' 项能力：' + items.join('、');
+      return;
+    }
+  }
+  if (selLayer) {
+    const s = layerStats(selLayer);
+    title.textContent = layerById(selLayer).cn + ' · ' + layerById(selLayer).value;
+    desc.textContent = '覆盖 ' + s.products + ' 个节点 · ' + s.items + ' 项能力';
+    return;
+  }
+  if (selProduct === 'engine') {
+    const items = ENGINE.reduce(function (s, n) { return s + n.items.length; }, 0);
+    title.textContent = 'AI 成长引擎 · 理解与规划中枢';
+    desc.textContent = '4 个节点 · ' + items + ' 项能力：数据中心 → 家长端 → 成长OS → AI成长Agent';
+    return;
+  }
+  if (selProduct) {
+    let layers = 0, items = 0;
+    Object.keys(CELLS).forEach(function (lid) {
+      const list = CELLS[lid][selProduct];
+      if (list) { layers += 1; items += list.length; }
+    });
+    title.textContent = prodById(selProduct).name;
+    desc.textContent = '覆盖 ' + layers + ' 个层级 · ' + items + ' 项能力';
+    return;
+  }
+  title.textContent = '全貌 · 从陪伴到成长的价值递进';
+  desc.textContent = '5 个层级纵向递进 · 5 款硬件产品横向覆盖 · AI 成长引擎沉淀数据并回传成长任务';
+}
+
+function attachSVGInteractions() {
+  document.querySelectorAll('.cell').forEach(function (c) {
+    c.addEventListener('click', function () {
+      const lid = c.dataset.layer, pid = c.dataset.product;
+      if (selLayer === lid && selProduct === pid) {
+        selLayer = null;
+        selProduct = null;
+      } else {
+        selLayer = lid;
+        selProduct = pid;
+      }
+      refreshChips();
+      applyFilters();
+      updateInsight();
+    });
+  });
+  document.querySelectorAll('.engine-node').forEach(function (g) {
+    g.addEventListener('click', function () {
+      const lid = g.dataset.layer;
+      if (selLayer === lid && selProduct === 'engine') {
+        selLayer = null;
+        selProduct = null;
+      } else {
+        selLayer = lid;
+        selProduct = 'engine';
+      }
+      refreshChips();
+      applyFilters();
+      updateInsight();
+    });
+  });
+}
+
+function buildStandaloneSVG() {
+  const wrap = document.createElement('div');
+  wrap.innerHTML = buildSVG();
+  const svg = wrap.firstElementChild;
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', H);
+  return svg;
+}
+
+async function exportPNG() {
+  const btn = document.getElementById('exportBtn');
+  btn.disabled = true;
+  btn.textContent = '生成中…';
+  try {
+    const svg = buildStandaloneSVG();
+    const xml = new XMLSerializer().serializeToString(svg);
+    const blob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    await new Promise(function (resolve, reject) {
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = url;
+    });
+    const scale = 2;
+    const canvas = document.createElement('canvas');
+    canvas.width = W * scale;
+    canvas.height = H * scale;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = '阿乐AI陪伴生态产品矩阵知识图谱.png';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    alert('导出失败，请稍后重试');
+  }
+  btn.disabled = false;
+  btn.textContent = '导出 PNG';
+}
+
+document.getElementById('resetBtn').addEventListener('click', function () {
+  selLayer = null;
+  selProduct = null;
+  refreshChips();
+  applyFilters();
+  updateInsight();
+});
+
+document.getElementById('fullscreenBtn').addEventListener('click', function () {
+  const shell = document.getElementById('graphShell');
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else if (shell.requestFullscreen) {
+    shell.requestFullscreen();
+  }
+});
+
+document.getElementById('exportBtn').addEventListener('click', exportPNG);
+
+renderGraph();
+buildChips();
+attachSVGInteractions();
+updateInsight();
+</script>
+</body>
+</html>

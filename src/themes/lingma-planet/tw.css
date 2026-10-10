@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lingma-green-100: #F3FAF5;
+  --color-lingma-green-200: #CDEED6;
+  --color-lingma-green-300: #7EDC8B;
+  --color-lingma-green-400: #52C873;
+  --color-lingma-green-500: #3DAA5E;
+  --color-lingma-green-700: #2C7A43;
+  --color-lingma-orange-100: #FFF6F0;
+  --color-lingma-orange-400: #F5A171;
+  --color-lingma-gray-50: #F7F9F8;
+  --color-lingma-gray-200: #E3E8E5;
+  --color-lingma-gray-500: #6F7672;
+  --color-lingma-gray-700: #2F3432;
+  --radius-lingma-card: 20px;
+  --radius-lingma-pill: 28px;
+}

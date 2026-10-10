@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+.dmb-page.dmb-variant-mobile-product {
+  --dmb-accent: #52C873;
+  --dmb-accent-contrast: #1F2321;
+  --dmb-link: #3DAA5E;
+  --dmb-ink: #2F3432;
+  --dmb-ink-subtle: #6F7672;
+  --dmb-bg: #F7F9F8;
+  --dmb-surface: #FFFFFF;
+  --dmb-border: #E3E8E5;
+  --dmb-font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --dmb-font-display: var(--dmb-font-sans);
+  --dmb-font-body: var(--dmb-font-sans);
+  --dmb-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --dmb-radius-control: 12px;
+  --dmb-radius-card: 20px;
+  --dmb-radius-preview: 20px;
+  --dmb-radius-pill: 28px;
+  --dmb-spacing-unit: 4px;
+  background: #F7F9F8;
+  color: #2F3432;
+}
+
+.dmb-page.dmb-variant-mobile-product .dmb-sheet {
+  background: #FFFFFF;
+}
+
+.dmb-page.dmb-variant-mobile-product .dmb-token-card,
+.dmb-page.dmb-variant-mobile-product .dmb-preview,
+.dmb-page.dmb-variant-mobile-product .dmb-mobile-screenshot {
+  border-color: #E3E8E5;
+}

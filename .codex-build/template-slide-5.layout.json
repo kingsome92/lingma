@@ -1,0 +1,5 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/i107q5of","index":4,"layout":{"id":"ly/p83mt83u","name":"标题和内容"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/k7mxovud","kind":"textbox","name":"标题 1","position":{"left":88,"top":38.33,"width":1104,"height":139.17},"text":"3. 四季度工作目标","style":{"fontSize":58.67,"typeface":"Arial","color":"#000000","alignment":"left"}},
+{"id":"sh/58vehgvy","kind":"textbox","name":"内容占位符 2","position":{"left":88,"top":191.67,"width":1104,"height":456.83},"text":"简要罗列四季度的产出目标（重点陈述可对外交付的成果，）\n","style":{"fontSize":26.67,"typeface":"Arial","color":"#A5A5A5","alignment":"left"}}
+]}

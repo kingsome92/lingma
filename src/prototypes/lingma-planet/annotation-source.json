@@ -1,0 +1,37 @@
+{
+  "documentVersion": 1,
+  "format": "axhub-annotation-source",
+  "data": {
+    "version": 2,
+    "prototypeName": "lingma-planet",
+    "pageId": "lingma-planet",
+    "nodes": [],
+    "updatedAt": 1791534765804
+  },
+  "markdownMap": {},
+  "assetMap": {},
+  "directory": {
+    "nodes": [
+      {
+        "type": "folder",
+        "id": "directory-pages",
+        "title": "页面",
+        "defaultExpanded": true,
+        "children": [
+          {
+            "type": "route",
+            "id": "route-home",
+            "title": "成长中心首页",
+            "route": "home"
+          },
+          {
+            "type": "route",
+            "id": "route-device",
+            "title": "设备管理",
+            "route": "device"
+          }
+        ]
+      }
+    ]
+  }
+}

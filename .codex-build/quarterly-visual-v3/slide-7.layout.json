@@ -1,0 +1,5 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/cmjltj","index":6,"layout":{"id":"ly/p83mt83u","name":"标题和内容"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/vax4vmt8","kind":"textbox","name":"标题 1","position":{"left":88,"top":38.33,"width":1104,"height":139.17},"text":"3. 重点项目进展","style":{"fontSize":58.67,"typeface":"Arial","color":"#000000","alignment":"left"}},
+{"id":"tb/3edcju5g","kind":"table","position":{"left":88,"top":180,"width":1104,"height":460},"text":"项目\t8-9月进展\t当前状态\t下一步\n福瑞达V5\tPO主导联调，每日跟踪；0904前完成固件提测\t因直播及线上版本优化暂缓\t10月重启内测并完成验证\n直播支持\t设备调试、提示词、人设风格、示例对话测试\t持续复盘优化\t沉淀稳定的人设与对话方案\nNFC故事阅读\t完成制卡、打样、数据写入与测试\t已完成打样\t推进内容与交互测试\n涂鸦云\t小程序SDK接入60%；配网、联网流程打通\t数据上报未打通\t10月完成对接","rows":5,"cols":4}
+]}

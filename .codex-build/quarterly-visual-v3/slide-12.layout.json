@@ -1,0 +1,8 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/9vtebo","index":11,"layout":{"id":"ly/p83mt83u","name":"标题和内容"},"backgroundColor":"rgba(255,255,255,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"sh/kfyl4fq9","kind":"textbox","name":"标题 1","position":{"left":88,"top":38.33,"width":1104,"height":139.17},"text":"7. 四季度工作思路","style":{"fontSize":58.67,"typeface":"Arial","color":"#000000","alignment":"left"}},
+{"id":"sh/ba5krqps","kind":"textbox","name":"内容占位符 2","position":{"left":88,"top":462,"width":1104,"height":170},"text":"硬件、固件、服务端与小程序多端协同，提前识别接口和排期依赖\n线上版本问题优先保障，建立快速定位、验证和回滚机制\n以月度交付节点为准，持续跟踪打样、验证、上线和复盘闭环","style":{"fontSize":21,"typeface":"Arial","color":"#202124","alignment":"left"}},
+{"id":"sh/a9wjyl87","kind":"textbox","position":{"left":90,"top":178,"width":300,"height":36},"text":"项目推进机制","style":{"fontSize":22,"typeface":"Arial","color":"#166534","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"tb/tw72dkr2","kind":"table","position":{"left":88,"top":220,"width":1104,"height":160},"text":"目标拆解\t方案与排期\t联调测试\t灰度验证\t复盘沉淀\n按月明确交付物\t绑定负责人和依赖\t每日跟踪问题清单\t分批验证核心体验\t更新Roadmap与规范","rows":2,"cols":5},
+{"id":"sh/f654jq9k","kind":"textbox","position":{"left":90,"top":420,"width":300,"height":36},"text":"重点关注","style":{"fontSize":22,"typeface":"Arial","color":"#166534","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0}
+]}

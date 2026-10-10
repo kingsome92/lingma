@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "input": "D:\\Codex\\养娃乐产品\\.local\\screenshot-to-prototype\\lingma-planet\\sources\\home-reference.png",
+  "sha256": "e6826eacd1c2c613bf3ce0c6d17c03b219f15d0718db163b72fea71623196b68",
+  "width": 1080,
+  "height": 2382,
+  "dimensions": {
+    "width": 1080,
+    "height": 2382
+  },
+  "viewport": {
+    "width": 1080,
+    "height": 2382,
+    "deviceScaleFactor": 1
+  },
+  "color": {
+    "sampledPixels": 2572560,
+    "meanRgb": [
+      236,
+      236,
+      231
+    ],
+    "meanHex": "#ecece7",
+    "dominant": [
+      {
+        "hex": "#f8f8f8",
+        "rgb": [
+          248,
+          248,
+          248
+        ],
+        "pixels": 2092923,
+        "ratio": 0.8135565351245452
+      },
+      {
+        "hex": "#888888",
+        "rgb": [
+          136,
+          136,
+          136
+        ],
+        "pixels": 163035,
+        "ratio": 0.0633746151693255
+      },
+      {
+        "hex": "#f8f8e8",
+        "rgb": [
+          248,
+          248,
+          232
+        ],
+        "pixels": 65003,
+        "ratio": 0.025267826600740118
+      },
+      {
+        "hex": "#e8e8e8",
+        "rgb": [
+          232,
+          232,
+          232
+        ],
+        "pixels": 18253,
+        "ratio": 0.0070952669714214635
+      },
+      {
+        "hex": "#78c878",
+        "rgb": [
+          120,
+          200,
+          120
+        ],
+        "pixels": 17949,
+        "ratio": 0.006977096744099263
+      },
+      {
+        "hex": "#989898",
+        "rgb": [
+          152,
+          152,
+          152
+        ],
+        "pixels": 17803,
+        "ratio": 0.006920343937556364
+      },
+      {
+        "hex": "#f8d8b8",
+        "rgb": [
+          248,
+          216,
+          184
+        ],
+        "pixels": 11552,
+        "ratio": 0.004490468638243617
+      },
+      {
+        "hex": "#a8a8a8",
+        "rgb": [
+          168,
+          168,
+          168
+        ],
+        "pixels": 9871,
+        "ratio": 0.003837033927294213
+      }
+    ]
+  },
+  "alpha": {
+    "hasAlphaChannel": false,
+    "transparentPixels": 0,
+    "translucentPixels": 0,
+    "opaquePixels": 2572560,
+    "transparentRatio": 0,
+    "translucentRatio": 0,
+    "opaqueRatio": 1,
+    "meanAlpha": 255
+  }
+}

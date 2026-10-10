@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-10T04:56:11.571Z",
+  "prototypes": [
+    {
+      "id": "item-prototypes-lingma-planet",
+      "kind": "item",
+      "title": "lingma planet",
+      "itemKey": "prototypes/lingma-planet"
+    },
+    {
+      "id": "item:prototypes:annotation-demo",
+      "kind": "item",
+      "title": "标注演示",
+      "itemKey": "prototypes/annotation-demo"
+    },
+    {
+      "id": "item:prototypes:beginner-guide",
+      "kind": "item",
+      "title": "新手指导",
+      "itemKey": "prototypes/beginner-guide"
+    },
+    {
+      "id": "item:prototypes:touch-and-talk-annotation-demo",
+      "kind": "item",
+      "title": "批注演示",
+      "itemKey": "prototypes/touch-and-talk-annotation-demo"
+    }
+  ],
+  "docs": [],
+  "themesTree": [
+    {
+      "id": "item-themes-lingma-planet",
+      "kind": "item",
+      "title": "lingma planet",
+      "itemKey": "themes/lingma-planet"
+    },
+    {
+      "id": "folder-1791595616173-0q1v3q",
+      "kind": "folder",
+      "title": "灵玛星球设计规范",
+      "children": []
+    }
+  ],
+  "themes": [],
+  "data": [],
+  "templates": [
+    "prd-template.md"
+  ],
+  "components": [],
+  "canvas": []
+}

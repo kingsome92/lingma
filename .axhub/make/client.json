@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "kind": "axhub-make-client",
+  "repository": "https://gitee.com/axhub/Axhub-Make/tree/main/client",
+  "templateUrl": "https://gitee.com/axhub/Axhub-Make/releases/download/make-client-template-v0.1.20/axhub-make-client-template.zip",
+  "project": {
+    "id": "养娃乐产品",
+    "name": "灵玛星球小程序"
+  }
+}

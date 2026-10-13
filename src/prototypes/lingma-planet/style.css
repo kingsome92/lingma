@@ -46,7 +46,7 @@ button { cursor: pointer; }
 .lingma-bound-actions button:nth-of-type(2) svg { width: 20px; height: 20px; }
 .lingma-bound-actions button:nth-of-type(3) svg { width: 22px; height: 22px; }
 .lingma-bound-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.lingma-device-menu { position: absolute; z-index: 6; top: 142px; left: 162px; width: 140px; overflow: hidden; border-radius: 24px; background: rgba(96, 96, 96, .92); box-shadow: 0 18px 32px rgba(49, 55, 51, .2); }
+.lingma-device-menu { position: absolute; z-index: 6; top: 72px; left: 34px; width: 140px; overflow: hidden; border-radius: 24px; background: rgba(96, 96, 96, .92); box-shadow: 0 18px 32px rgba(49, 55, 51, .2); }
 .lingma-device-menu button { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; padding: 7px 18px; background: transparent; color: #fff; font-size: 22px; text-align: left; }
 .lingma-device-menu button:hover, .lingma-device-menu button:focus-visible { background: rgba(255, 255, 255, .11); }
 .lingma-device-menu svg { flex: 0 0 auto; }
@@ -64,12 +64,93 @@ button { cursor: pointer; }
 .lingma-mascot { position: absolute; z-index: 2; top: 1006px; left: 54px; width: 226px; height: auto; object-fit: contain; pointer-events: none; }
 .lingma-service-button { position: absolute; right: 30px; top: 1050px; display: flex; flex-direction: column; align-items: center; gap: 5px; width: 84px; border: 0; border-radius: 24px; padding: 16px 8px 12px; background: #fff; color: var(--lingma-green-400); box-shadow: 0 8px 22px rgba(83, 96, 88, .08); font-size: 16px; }
 .lingma-tool-panel { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin: 0 30px; padding: 30px; border-radius: 32px; background: #fff; }
+.lingma-audio-entry { position: relative; z-index: 3; display: flex; align-items: center; gap: 14px; width: calc(100% - 60px); margin: 0 30px 18px; border: 1px solid #d9eee0; border-radius: 24px; padding: 16px 18px; background: linear-gradient(105deg, #f1fbf4, #fff); color: #31513d; text-align: left; box-shadow: 0 8px 18px rgba(73, 126, 83, .06); }
+.lingma-audio-entry-icon { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 16px; background: var(--lingma-green-400); color: #fff; }
+.lingma-audio-entry-copy { display: grid; flex: 1; gap: 3px; min-width: 0; }
+.lingma-audio-entry-copy strong { font-size: 16px; line-height: 1.4; }
+.lingma-audio-entry-copy small { overflow: hidden; color: #6f7975; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.lingma-audio-entry-action { display: inline-flex; align-items: center; gap: 5px; color: var(--lingma-green-500); }
 .lingma-tool-item { position: relative; display: flex; align-items: center; gap: 18px; height: 60px; min-height: 60px; border: 0; border-radius: 20px; padding: 20px 22px; background: var(--lingma-gray-50); color: #34413e; font-size: 16px; font-weight: 400; text-align: left; }
 .lingma-tool-item svg { flex: 0 0 auto; color: var(--lingma-green-400); }
 .lingma-tool-badge { position: absolute; right: 0; top: -10px; min-width: 20px; height: 20px; padding: 3px 7px; border-radius: 10px; background: var(--lingma-orange-400); color: #fff; font-size: 12px; line-height: 14px; text-align: center; }
 .lingma-bottom-nav { position: fixed; z-index: 4; bottom: 0; left: 50%; display: grid; grid-template-columns: repeat(5, 1fr); width: min(100%, 750px); padding-bottom: env(safe-area-inset-bottom); transform: translateX(-50%); border-top: 1px solid var(--lingma-gray-200); background: #fff; }
 .lingma-bottom-nav button { display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; padding: 15px 5px 12px; background: transparent; color: #969f9b; font-size: 18px; }
 .lingma-bottom-nav button.is-active { color: var(--lingma-green-400); }
+
+.lingma-audio-page { min-height: 100vh; padding: 0 16px 118px; background: var(--lingma-gray-50); }
+.lingma-audio-page .lingma-chrome { position: sticky; top: 0; z-index: 10; margin: 0 -16px; padding: 0 16px; background: var(--lingma-gray-50); }
+.lingma-audio-hero { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 8px; border-radius: 24px; padding: 22px 20px; background: linear-gradient(135deg, #effaf2, #fff); }
+.lingma-audio-eyebrow { color: var(--lingma-green-500); font-size: 12px; font-weight: 700; }
+.lingma-audio-hero h2 { margin: 6px 0 5px; color: #2f3432; font-size: 20px; }
+.lingma-audio-hero p { max-width: 245px; margin: 0; color: #6f7975; font-size: 13px; line-height: 1.55; }
+.lingma-album-cover { position: relative; display: grid; flex: 0 0 auto; width: 76px; height: 76px; place-items: center; overflow: hidden; isolation: isolate; border-radius: 22px; color: #2c7a43; box-shadow: inset 0 0 0 1px rgba(255,255,255,.54); }
+.lingma-album-cover.mint { background: #cdeed6; color: #3daa5e; }
+.lingma-album-cover.sun { background: #ffedb8; color: #aa7d1e; }
+.lingma-album-cover.peach { background: #f8d4be; color: #b7673e; }
+.lingma-album-cover.lavender { background: #e9e0f8; color: #775ca8; }
+.lingma-album-cover.blue { background: #d9eafb; color: #4f83ad; }
+.lingma-album-cover.lemon { background: #f4f0bf; color: #8c812b; }
+.lingma-album-cover::before { position: absolute; z-index: -1; width: 72%; height: 72%; border: 1px solid currentColor; border-radius: 50%; opacity: .22; content: ''; transform: rotate(-18deg); }
+.lingma-album-cover::after { position: absolute; right: -18%; bottom: -34%; width: 70%; height: 70%; border-radius: 50%; background: rgba(255,255,255,.38); content: ''; }
+.lingma-album-cover-orbit { position: absolute; top: 9%; right: 12%; width: 17px; height: 17px; border: 2px solid currentColor; border-radius: 50%; opacity: .28; }
+.lingma-album-cover-spark { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .5; }
+.lingma-album-cover-spark.spark-one { top: 19%; left: 16%; }
+.lingma-album-cover-spark.spark-two { right: 20%; bottom: 17%; width: 4px; height: 4px; }
+.lingma-album-cover-icon { position: relative; z-index: 1; display: grid; place-items: center; filter: drop-shadow(0 2px 1px rgba(255,255,255,.5)); }
+.lingma-album-cover-label { position: absolute; z-index: 1; right: 9px; bottom: 8px; max-width: calc(100% - 18px); overflow: hidden; color: currentColor; font-size: 8px; font-weight: 800; letter-spacing: .4px; line-height: 1; text-overflow: ellipsis; white-space: nowrap; opacity: .78; }
+.lingma-album-cover.is-beiwa-selected { background: linear-gradient(145deg, #c9f2d7 0%, #e8faed 56%, #aee7c1 100%); }
+.lingma-album-cover.is-classics { background: linear-gradient(145deg, #ffe9a9 0%, #fff6d7 54%, #f8d878 100%); }
+.lingma-album-cover.is-stories { background: linear-gradient(145deg, #f6c7ab 0%, #fff0e7 56%, #eca47d 100%); }
+.lingma-album-cover.is-poems { background: linear-gradient(145deg, #e7d8fb 0%, #f8f2ff 54%, #cdb8ee 100%); }
+.lingma-album-cover.is-science { background: linear-gradient(145deg, #cfe8fb 0%, #eef8ff 54%, #9bcceb 100%); }
+.lingma-album-cover.is-english { background: linear-gradient(145deg, #f5edb6 0%, #fffbe5 54%, #e6d975 100%); }
+.lingma-album-cover.is-featured { background: linear-gradient(145deg, #c9f2d7 0%, #f1fff4 54%, #a8e4bc 100%); }
+.lingma-audio-search { display: flex; align-items: center; gap: 9px; height: 46px; margin-top: 16px; border: 1px solid var(--lingma-gray-200); border-radius: 14px; padding: 0 13px; background: #fff; color: #84908a; }
+.lingma-audio-search input { flex: 1; min-width: 0; border: 0; outline: none; background: transparent; color: #2f3432; font-size: 14px; }
+.lingma-audio-search kbd { border-radius: 6px; padding: 3px 5px; background: var(--lingma-gray-100); color: #9aa39f; font-size: 10px; }
+.lingma-audio-category-row { display: flex; align-items: center; gap: 7px; margin: 14px 0 4px; overflow-x: auto; color: #9aa39f; scrollbar-width: none; }
+.lingma-audio-category-row::-webkit-scrollbar { display: none; }
+.lingma-audio-category-row button { flex: 0 0 auto; height: 32px; border: 0; border-radius: 16px; padding: 0 12px; background: #fff; color: #6f7975; font-size: 12px; }
+.lingma-audio-category-row button.is-active { background: var(--lingma-green-400); color: #fff; }
+.lingma-audio-section { margin-top: 24px; }
+.lingma-audio-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 2px 12px; }
+.lingma-audio-section-heading h3 { margin: 0; color: #2f3432; font-size: 17px; }
+.lingma-audio-section-heading span, .lingma-audio-section-heading button { display: inline-flex; align-items: center; gap: 2px; border: 0; background: transparent; color: #3daa5e; font-size: 12px; }
+.lingma-album-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.lingma-album-card { display: grid; justify-items: start; gap: 7px; border: 0; border-radius: 20px; padding: 13px; background: #fff; color: #2f3432; text-align: left; }
+.lingma-album-card .lingma-album-cover { width: 100%; height: 92px; border-radius: 16px; }
+.lingma-album-card strong { width: 100%; overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.lingma-album-card small, .lingma-audio-album-row small, .lingma-audio-track-copy small { color: #87908c; font-size: 11px; }
+.lingma-audio-album-list, .lingma-audio-track-list { display: grid; gap: 10px; }
+.lingma-audio-album-row { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; border-radius: 18px; padding: 12px; background: #fff; color: #65716b; text-align: left; }
+.lingma-audio-album-row .lingma-album-cover { width: 48px; height: 48px; border-radius: 14px; }
+.lingma-audio-album-row > span:nth-child(2) { display: grid; flex: 1; gap: 3px; min-width: 0; }
+.lingma-audio-album-row strong { overflow: hidden; color: #2f3432; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.lingma-audio-track-row { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 60px; border: 0; border-radius: 16px; padding: 10px 12px; background: #fff; color: #83908a; text-align: left; }
+.lingma-audio-track-row.is-playing { background: #f0faf3; }
+.lingma-audio-track-index { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; background: var(--lingma-gray-100); color: var(--lingma-green-500); }
+.lingma-audio-track-copy { display: grid; flex: 1; gap: 3px; min-width: 0; }
+.lingma-audio-track-copy strong { overflow: hidden; color: #2f3432; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.lingma-audio-track-row time { font-size: 11px; }
+.lingma-audio-track-row i { border-radius: 8px; padding: 3px 6px; background: #dff5e5; color: var(--lingma-green-500); font-size: 10px; font-style: normal; }
+.lingma-audio-empty { display: grid; justify-items: center; gap: 8px; padding: 42px 20px; border-radius: 20px; background: #fff; color: #9aa39f; text-align: center; }
+.lingma-audio-empty strong { color: #59635e; font-size: 15px; }
+.lingma-audio-empty span { font-size: 12px; }
+.lingma-audio-mini-player { position: fixed; z-index: 11; bottom: 70px; left: 50%; display: flex; align-items: center; gap: 8px; width: min(calc(100% - 24px), 726px); min-height: 64px; transform: translateX(-50%); border: 1px solid #d8eee0; border-radius: 18px; padding: 8px 10px; background: rgba(255,255,255,.96); box-shadow: 0 10px 28px rgba(49,92,58,.12); backdrop-filter: blur(10px); }
+.lingma-audio-mini-art { display: grid; width: 42px; height: 42px; place-items: center; border: 0; border-radius: 14px; background: #e3f7e8; color: var(--lingma-green-500); }
+.lingma-audio-mini-copy { display: grid; flex: 1; gap: 3px; min-width: 0; border: 0; background: transparent; text-align: left; }
+.lingma-audio-mini-copy strong { overflow: hidden; color: #2f3432; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.lingma-audio-mini-copy small { overflow: hidden; color: #87908c; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.lingma-audio-mini-skip, .lingma-audio-mini-play { display: grid; place-items: center; border: 0; background: transparent; color: #6f7975; }
+.lingma-audio-mini-play { width: 38px; height: 38px; border-radius: 50%; background: var(--lingma-green-400); color: #fff; }
+.lingma-album-page { padding-bottom: 118px; }
+.lingma-album-hero { display: flex; align-items: center; gap: 16px; margin-top: 8px; padding: 18px 4px 8px; }
+.lingma-album-hero .lingma-album-cover { width: 100px; height: 100px; border-radius: 24px; }
+.lingma-album-hero > div { display: grid; gap: 6px; min-width: 0; }
+.lingma-album-hero span { color: var(--lingma-green-500); font-size: 12px; font-weight: 700; }
+.lingma-album-hero h2 { margin: 0; color: #2f3432; font-size: 20px; }
+.lingma-album-hero p { margin: 0; color: #87908c; font-size: 12px; }
+.lingma-play-all { display: inline-flex; align-items: center; gap: 7px; margin: 10px 0 8px; border: 0; border-radius: 18px; padding: 10px 16px; background: var(--lingma-green-400); color: #fff; font-size: 14px; font-weight: 600; }
 
 .lingma-device-page .lingma-chrome { position: sticky; top: 0; z-index: 10; margin: -26px -30px 22px; padding: 26px 30px 0; background: var(--lingma-gray-50); }
 .lingma-device-profile { display: flex; align-items: center; gap: 20px; padding: 20px 26px; border-radius: 24px; background: #fff; }
@@ -113,12 +194,138 @@ button { cursor: pointer; }
 .lingma-parameter-card > p { margin: -12px 0 0; padding-bottom: 14px; color: #c0c7c3; font-size: 17px; line-height: 1.55; }
 .lingma-unbind-row { display: flex; justify-content: space-between; width: 100%; border: 0; padding: 21px 0 5px; background: transparent; color: #555d59; font-size: 23px; text-align: left; }
 
+.lingma-voice-entry { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 14px; border: 0; border-radius: 26px; padding: 24px 28px; background: #fff; color: #4f5753; text-align: left; }
+.lingma-voice-entry > span:last-child { display: flex; align-items: center; gap: 7px; color: #a2aaa6; }
+.lingma-voice-entry small { font-size: 14px; }
+.lingma-voice-page { min-height: 100vh; background: #F7F9F8; padding-bottom: 108px; }
+.lingma-voice-intro { display: flex; align-items: flex-start; gap: 13px; border-radius: 22px; padding: 20px; background: #fff; color: var(--lingma-green-400); }
+.lingma-voice-intro p { margin: 0; color: #4d5752; font-size: 16px; line-height: 1.5; }
+.lingma-voice-list-heading { display: flex; align-items: center; justify-content: space-between; margin: 24px 8px 12px; font-size: 14px; }
+.lingma-voice-list-heading span { color: var(--lingma-green-500); font-weight: 800; }
+.lingma-voice-list { display: grid; gap: 12px; }
+.lingma-voice-profile { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 12px; border-radius: 22px; padding: 18px; background: #fff; }
+.lingma-voice-avatar { display: block; width: 40px; height: 40px; flex: 0 0 40px; overflow: hidden; border-radius: 50%; background-color: #dff7eb; background-repeat: no-repeat; background-size: 500% 100%; background-position: var(--lingma-avatar-position, 0%) center; }
+.lingma-voice-profile h2 { display: flex; align-items: center; gap: 7px; margin: 0 0 4px; font-size: 16px; line-height: 1.5; font-weight: 600; }
+.lingma-voice-profile h2 em { border-radius: 7px; padding: 3px 7px; background: #e7f8ed; color: var(--lingma-green-500); font-size: 12px; line-height: 1.45; font-style: normal; }
+.lingma-voice-profile p { margin: 0; color: #6f7672; font-size: 12px; line-height: 1.45; }
+.lingma-voice-profile button { display: inline-flex; align-items: center; gap: 3px; border: 0; padding: 8px 2px; background: transparent; color: var(--lingma-green-500); font-size: 14px; }
+.lingma-voice-profile button.is-danger { color: #ef776c; }
+.lingma-voice-note { display: flex; align-items: center; gap: 6px; margin: 14px 8px; color: #948f82; font-size: 14px; }
+.lingma-voice-empty { display: grid; min-height: 330px; place-items: center; align-content: center; gap: 13px; color: #bbb9af; text-align: center; }
+.lingma-voice-empty strong { color: #565b58; font-size: 20px; }
+.lingma-voice-empty p { margin: 0; line-height: 1.7; }
+.lingma-primary-button { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 52px; border: 0; border-radius: 20px; background: var(--lingma-green-400); color: #fff; font-size: 16px; font-weight: 600; line-height: 1; }
+.lingma-primary-button:disabled { background: #e9e7df; color: #bdbab0; cursor: not-allowed; }
+.lingma-voice-register-button, .lingma-voice-next { position: fixed; z-index: 9; bottom: 20px; left: 50%; width: min(calc(100% - 60px), 690px); transform: translateX(-50%); }
+.lingma-voice-steps { display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: start; margin: 6px 8px 24px; }
+.lingma-voice-step { display: grid; justify-items: center; gap: 6px; color: #a7a59d; font-size: 12px; }
+.lingma-voice-step span { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; background: #ebe8df; font-weight: 800; }
+.lingma-voice-step.is-current, .lingma-voice-step.is-complete { color: var(--lingma-green-500); }
+.lingma-voice-step.is-current span, .lingma-voice-step.is-complete span { background: var(--lingma-green-400); color: #fff; }
+.lingma-voice-steps > i { height: 2px; margin-top: 15px; background: #e6e2d9; }
+.lingma-voice-steps > i.is-complete { background: var(--lingma-green-400); }
+.lingma-voice-form-card, .lingma-voice-collect-card, .lingma-voice-success-card { border-radius: 24px; padding: 22px; background: #fff; }
+.lingma-voice-form-card label, .lingma-voice-form-card legend { display: grid; gap: 12px; color: #353b38; font-size: 16px; font-weight: 600; line-height: 1; }
+.lingma-voice-form-card input { width: 100%; border: 1px solid transparent; border-radius: 15px; padding: 16px; background: #f8f5ee; outline: none; font-size: 16px; }
+.lingma-voice-form-card input:focus { border-color: #65dba8; }
+.lingma-field-error { display: flex; align-items: center; gap: 5px; margin: 8px 0 0; color: #ef776c; font-size: 14px; line-height: 1.55; }
+.lingma-voice-form-card fieldset { margin: 22px 0 0; border: 0; padding: 0; }
+.lingma-role-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+.lingma-role-options button { display: grid; justify-items: start; gap: 6px; min-height: 122px; border: 1px solid #eeeae0; border-radius: 18px; padding: 16px; background: #fff; color: #b9bcb8; text-align: left; }
+.lingma-role-options button.is-selected { border-color: var(--lingma-green-400); background: #eafaf3; color: var(--lingma-green-500); }
+.lingma-role-options button:disabled { opacity: .5; cursor: not-allowed; }
+.lingma-role-options small { color: #a4a7a3; }
+.lingma-role-warning { display: flex; align-items: center; gap: 5px; margin: 12px 0 0; border-radius: 10px; padding: 9px 10px; background: #fff0e5; color: #df864d; font-size: 14px; line-height: 1.55; }
+.lingma-online-check { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; margin-top: 14px; border: 1px solid #e4e0d6; border-radius: 18px; padding: 15px; background: #fff; }
+.lingma-online-check input { position: absolute; opacity: 0; }
+.lingma-online-check > span { display: grid; grid-row: 1 / 3; width: 24px; height: 24px; place-items: center; border: 1px solid #c8c5bc; border-radius: 7px; color: transparent; }
+.lingma-online-check input:checked + span { border-color: var(--lingma-green-400); background: var(--lingma-green-400); color: #fff; }
+.lingma-online-check b { font-size: 15px; }
+.lingma-online-check small { margin-top: 5px; color: #aaa79e; }
+.lingma-voice-collect-card, .lingma-voice-success-card { display: grid; justify-items: center; min-height: 560px; align-content: center; text-align: center; }
+.lingma-mic-illustration { display: grid; width: 132px; height: 132px; place-items: center; border-radius: 50%; background: #e0f8ec; color: var(--lingma-green-500); }
+.lingma-mic-illustration.is-recording { animation: lingma-pulse 1s ease-in-out infinite; }
+.lingma-voice-collect-card > p { margin: 24px 0 8px; color: #555b58; line-height: 1.55; }
+.lingma-voice-collect-card > strong { margin-bottom: 34px; color: var(--lingma-green-500); font-size: 20px; }
+.lingma-text-button { margin-top: 14px; border: 0; background: transparent; color: #9d9a91; font-size: 13px; text-decoration: underline; }
+.lingma-voice-progress { width: 100%; color: #555b58; }
+.lingma-voice-progress div { height: 10px; margin: 16px 0; overflow: hidden; border-radius: 99px; background: #eeeae2; }
+.lingma-voice-progress i { display: block; width: 100%; height: 100%; background: var(--lingma-green-400); animation: lingma-progress 1.2s linear; }
+.lingma-voice-progress small { color: #aaa79e; }
+.lingma-voice-result { display: grid; width: 100%; justify-items: center; gap: 12px; color: #f06d61; }
+.lingma-voice-result h2, .lingma-voice-success-card h2 { margin: 5px 0 0; color: #343a37; }
+.lingma-voice-result p, .lingma-voice-success-card p { margin: 0 0 10px; color: #95928a; line-height: 1.6; }
+.lingma-voice-result > button:not(.lingma-outline-button) { width: 100%; border: 0; border-radius: 18px; padding: 15px; background: var(--lingma-green-400); color: #fff; font-weight: 800; }
+.lingma-outline-button { border: 1px solid #54ce9a; border-radius: 16px; padding: 13px 18px; background: #fff; color: var(--lingma-green-500); }
+.lingma-success-icon { display: grid; width: 86px; height: 86px; place-items: center; border: 4px solid var(--lingma-green-400); border-radius: 50%; color: var(--lingma-green-500); }
+.lingma-voice-success-card .lingma-primary-button { margin-top: 32px; }
+.lingma-modal-backdrop { position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(29, 30, 27, .46); }
+.lingma-confirm-modal { width: min(100%, 360px); border-radius: 20px; padding: 24px; background: #fff; text-align: center; }
+.lingma-confirm-modal > svg { color: #ef776c; }
+.lingma-confirm-modal h2 { margin: 10px 0; }
+.lingma-confirm-modal p { color: #777c79; line-height: 1.6; }
+.lingma-confirm-modal > div { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.lingma-danger-button { border: 0; border-radius: 16px; background: #f06d61; color: #fff; font-weight: 800; }
+@keyframes lingma-pulse { 50% { box-shadow: 0 0 0 18px rgba(57, 206, 145, .14); } }
+@keyframes lingma-progress { from { width: 8%; } to { width: 100%; } }
+
+
+.lingma-voice-page { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 16px; line-height: 1.5; }
+.lingma-voice-page .lingma-chrome h1, .lingma-voice-page h2 { font-size: 20px; line-height: 1.4; font-weight: 700; }
+.lingma-voice-page .lingma-voice-profile h2 { font-size: 16px; line-height: 1.5; font-weight: 600; overflow-wrap: anywhere; }
+.lingma-voice-page .lingma-voice-profile em { flex-shrink: 0; }
+.lingma-voice-entry .lingma-setting-label strong { font-size: 17px; font-weight: 600; line-height: 1.5; }
+.lingma-voice-page .lingma-chrome { background: #faf7f0; }
+.lingma-voice-intro > svg { flex-shrink: 0; }
+.lingma-voice-page .lingma-system-menu { position: static; margin-left: auto; }
+.lingma-voice-page .lingma-chrome h1 { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+.lingma-system-circle { width: 14px; height: 14px; border: 2px solid currentColor; border-radius: 50%; }
+.lingma-voice-profile em.adult { background: var(--lingma-orange-100); color: #d97a45; }
+.lingma-voice-list-heading small { color: #6f7672; font-size: 12px; }
+.lingma-voice-profile button { min-height: 44px; }
+.lingma-voice-form-card { padding: 20px; border-radius: 20px; margin-bottom: 12px; }
+.lingma-voice-form-card input { margin-top: 12px; height: 48px; border-radius: 12px; padding: 12px; }
+.lingma-voice-form-card input[aria-invalid="true"] { border-color: #d97a45; }
+.lingma-voice-form-card fieldset { margin: 0; }
+.lingma-role-options button { position: relative; color: #6f7672; }
+.lingma-role-options button:disabled { opacity: .5; }
+.lingma-role-options .lingma-voice-avatar { width: 40px; height: 40px; flex-basis: 40px; }
+.lingma-role-check { position: absolute; right: 12px; top: 12px; color: var(--lingma-green-500); }
+.lingma-role-options strong { font-size: 16px; font-weight: 600; }
+.lingma-role-options small, .lingma-online-check small { font-size: 12px; line-height: 1.45; color: #6f7672; }
+.lingma-online-check { margin-top: auto; }
+.lingma-online-check b { font-size: 14px; line-height: 1.55; font-weight: 600; }
+.lingma-online-check.is-checked { background: #f3faf5; border-color: var(--lingma-green-400); }
+.lingma-online-check input:focus-visible + span { outline: 2px solid #7edc8b; outline-offset: 3px; }
+.lingma-voice-form-card ~ .lingma-online-check { margin-top: 28px; }
+.lingma-voice-collect-card { padding: 32px 20px 24px; min-height: 580px; }
+.lingma-voice-collect-card > strong { font-size: 16px; line-height: 1.5; font-weight: 600; overflow-wrap: anywhere; }
+.lingma-voice-progress { position: relative; width: 120px; height: 120px; margin: 12px 0; }
+.lingma-voice-progress svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.lingma-voice-progress circle { fill: none; stroke: #e3e8e5; stroke-width: 7; }
+.lingma-voice-progress circle:last-child { stroke: var(--lingma-green-400); stroke-linecap: round; }
+.lingma-voice-progress b { position: absolute; top: 37px; left: 0; width: 100%; font-size: 20px; line-height: 1.4; color: var(--lingma-green-500); }
+.lingma-voice-progress small { position: absolute; top: 69px; left: 0; width: 100%; font-size: 12px; line-height: 1.45; }
+.lingma-voice-success-card { min-height: 580px; gap: 12px; }
+.lingma-voice-success-guide { margin: 16px 0 24px !important; font-size: 16px; line-height: 1.5; }
+.lingma-voice-success-guide strong { color: var(--lingma-green-500); font-weight: 600; }
+.lingma-voice-result p, .lingma-voice-success-card > p:not(.lingma-voice-success-guide) { font-size: 14px; line-height: 1.55; color: #6f7672; }
+.lingma-voice-page .lingma-text-button { display: inline-flex; align-items: center; min-height: 44px; margin-top: 0; font-size: 14px; line-height: 1.55; color: #6f7672; }
+.lingma-voice-help { margin-top: 8px; padding: 16px; border-radius: 20px; background: #fff; }
+.lingma-voice-help h2 { font-size: 16px; margin: 0; }
+.lingma-voice-help p { font-size: 14px; line-height: 1.55; color: #6f7672; }
+.lingma-confirm-modal { width: min(100%, 320px); padding: 20px; }
+.lingma-confirm-modal h2 { font-size: 20px; line-height: 1.4; }
+.lingma-confirm-modal p { font-size: 14px; line-height: 1.55; }
+.lingma-confirm-modal button { height: 36px; padding: 0 16px; border-radius: 28px; font-size: 16px; line-height: 1; font-weight: 600; }
+.lingma-voice-page button:focus-visible { outline: 2px solid #7edc8b; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .lingma-mic-illustration.is-recording { animation: none; } }
 @media (max-width: 640px) {
     .lingma-home-page, .lingma-device-page { width: 100%; }
     .lingma-home-dashboard { min-height: 540px; padding: 137px 16px 20px; }
     .lingma-brand-pill { top: 29px; width: 90px; height: 36px; font-size: 14px; font-weight: 400; }
     .lingma-bound-actions { top: 29px; left: 20px; height: 36px; padding: 2px 6px 2px 4px; }
-    .lingma-device-menu { top: 119px; left: 100px; width: 140px; border-radius: 20px; }
+    .lingma-device-menu { top: 72px; left: 20px; width: 140px; border-radius: 20px; }
     .lingma-device-menu button { gap: 9px; padding: 7px 14px; font-size: 16px; }
     .lingma-device-menu button svg { width: 22px; }
     .lingma-bound-device-name { margin: 3px 0 10px; font-size: 17px; }
@@ -158,6 +365,15 @@ button { cursor: pointer; }
     .lingma-parameter-row { font-size: 16px; }
     .lingma-parameter-card > p { font-size: 12px; }
     .lingma-unbind-row { font-size: 16px; }
+    .lingma-voice-entry { border-radius: 20px; padding: 18px 16px; }
+    .lingma-voice-entry small { font-size: 14px; }
+    .lingma-voice-intro p { font-size: 16px; }
+    .lingma-voice-profile { grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 8px; padding: 14px 12px; }
+    .lingma-voice-avatar { width: 40px; height: 40px; flex-basis: 40px; }
+    .lingma-voice-profile h2 { font-size: 16px; }
+    .lingma-voice-profile button { font-size: 14px; }
+    .lingma-voice-register-button, .lingma-voice-next { bottom: 14px; width: calc(100% - 32px); }
+    .lingma-voice-collect-card, .lingma-voice-success-card { min-height: 520px; }
 }
 
 @media (max-width: 400px) {

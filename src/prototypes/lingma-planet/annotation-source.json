@@ -4,9 +4,195 @@
   "data": {
     "version": 2,
     "prototypeName": "lingma-planet",
-    "pageId": "lingma-planet",
-    "nodes": [],
-    "updatedAt": 1791534765804
+    "pageId": "home",
+    "nodes": [
+      {
+        "id": "home-brand",
+        "index": 1,
+        "title": "品牌胶囊",
+        "pageId": "home",
+        "locator": { "selectors": ["[data-annotation-id=\"home-brand\"]"], "fingerprint": "div|data-annotation-id=home-brand", "path": [] },
+        "aiPrompt": "说明灵玛乐园品牌胶囊的展示职责和命名关系。",
+        "annotationText": "展示品牌名称“灵玛乐园”。当前只承担品牌识别，不提供跳转。‘灵玛乐园’与‘灵玛星球’的产品命名关系待产品确认。",
+        "hasMarkdown": false,
+        "color": "#3DAA5E",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000
+      },
+      {
+        "id": "home-device-actions",
+        "index": 2,
+        "title": "已绑定设备入口",
+        "pageId": "home",
+        "locator": { "selectors": ["[data-annotation-id=\"home-device-actions\"]"], "fingerprint": "div|data-annotation-id=home-device-actions", "path": [] },
+        "aiPrompt": "说明首页设备头像、菜单和添加设备入口当前的交互边界。",
+        "annotationText": "头像和设备管理入口进入设备管理页；设置图标展开设备功能菜单；加号当前只收起菜单，添加设备流程尚未实现。",
+        "hasMarkdown": false,
+        "color": "#D97A45",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000,
+        "controls": [
+          { "type": "switch", "attributeId": "lingma_menu_open", "displayName": "设备菜单", "info": "切换当前首页设备功能菜单。", "initialValue": false }
+        ]
+      },
+      {
+        "id": "home-device-menu",
+        "index": 3,
+        "title": "设备功能菜单",
+        "pageId": "home",
+        "locator": { "selectors": ["[data-annotation-id=\"home-device-menu\"]"], "fingerprint": "div|data-annotation-id=home-device-menu", "path": [] },
+        "aiPrompt": "说明设备功能菜单中的页面入口和未实现项。",
+        "annotationText": "菜单包含设备管理、语音留言、内容拦截、睡眠提醒、成长测评。当前只有设备管理可进入设备页，其他项目仅作展示入口。",
+        "hasMarkdown": false,
+        "color": "#D97A45",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000
+      },
+      {
+        "id": "home-growth-summary",
+        "index": 4,
+        "title": "成长摘要卡",
+        "pageId": "home",
+        "locator": { "selectors": ["[data-annotation-id=\"home-growth-summary\"]"], "fingerprint": "div|data-annotation-id=home-growth-summary", "path": [] },
+        "aiPrompt": "说明成长摘要卡的内容结构、单一文本元素和响应式高度规则。",
+        "annotationText": "卡片展示问候语和一段成长阶段说明。阶段说明与陪伴建议使用同一个文本元素，在统一内容容器中自然换行；卡片高度随文本和底部按钮空间自适应。示例昵称、阶段和建议来源待确认。",
+        "hasMarkdown": false,
+        "color": "#3DAA5E",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000
+      },
+      {
+        "id": "home-voice-memory",
+        "index": 5,
+        "title": "童言拾光",
+        "pageId": "home",
+        "locator": { "selectors": ["[data-annotation-id=\"home-voice-memory\"]"], "fingerprint": "button|data-annotation-id=home-voice-memory", "path": [] },
+        "aiPrompt": "说明童言拾光按钮的展示、徽标和未实现行为。",
+        "annotationText": "按钮按内容宽度收缩并固定在成长摘要卡右下方，徽标‘4’为示例值。当前未接入童言记录页、播放或统计逻辑。徽标口径与零记录状态待确认。",
+        "hasMarkdown": false,
+        "color": "#D97A45",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000
+      },
+      {
+        "id": "home-growth-tools",
+        "index": 6,
+        "title": "成长工具面板",
+        "pageId": "home",
+        "locator": { "selectors": ["[data-annotation-id=\"home-growth-tools\"]"], "fingerprint": "section|data-annotation-id=home-growth-tools", "path": [] },
+        "aiPrompt": "说明六个成长工具入口和当前仅实现的导航链路。",
+        "annotationText": "面板包含聊天记录、孩子的心情、孩子的闪光点、成长报告、闹钟提醒、成长目标。徽标为示例值；当前只有成长报告暂时进入设备管理页，其余入口尚未接入页面。",
+        "hasMarkdown": false,
+        "color": "#D97A45",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000
+      },
+      {
+        "id": "device-profile",
+        "index": 7,
+        "title": "设备身份卡",
+        "pageId": ["device-basic", "device-system"],
+        "locator": { "selectors": ["[data-annotation-id=\"device-profile\"]"], "fingerprint": "section|data-annotation-id=device-profile", "path": [] },
+        "aiPrompt": "说明设备身份卡中的示例字段及未实现操作。",
+        "annotationText": "展示示例设备‘V5测试的小乐’、主人昵称‘V5测试’和设备头像。切换设备、编辑名称、复制昵称当前未实现，字段来源和多设备规则待确认。",
+        "hasMarkdown": false,
+        "color": "#3DAA5E",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000
+      },
+      {
+        "id": "device-tabs",
+        "index": 8,
+        "title": "设备设置分类",
+        "pageId": ["device-basic", "device-system"],
+        "locator": { "selectors": ["[data-annotation-id=\"device-tabs\"]"], "fingerprint": "div|data-annotation-id=device-tabs", "path": [] },
+        "aiPrompt": "说明基础设置与系统参数两个分类及默认页。",
+        "annotationText": "设备管理分为基础设置和系统参数，默认打开基础设置。切换只改变当前展示内容，仍属于同一个设备管理页面。",
+        "hasMarkdown": false,
+        "color": "#3DAA5E",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000,
+        "controls": [
+          { "type": "segmented", "attributeId": "lingma_settings_tab", "displayName": "设备设置分类", "info": "切换设备管理的两个已实现分类。", "initialValue": "basic", "options": [{ "label": "基础设置", "value": "basic" }, { "label": "系统参数", "value": "system" }] }
+        ]
+      },
+      {
+        "id": "device-conversation",
+        "index": 9,
+        "title": "主动对话",
+        "pageId": "device-basic",
+        "locator": { "selectors": ["[data-annotation-id=\"device-conversation\"]"], "fingerprint": "section|data-annotation-id=device-conversation", "path": [] },
+        "aiPrompt": "说明主动对话开关、静默间隔和攀谈次数。",
+        "annotationText": "默认开启，静默间隔为 30 秒，可选 10–60 秒、步进 10 秒；说明当前攀谈总次数为 3 次。关闭后显示‘已关闭’并禁用频次滑杆。计数周期和重置规则待确认。",
+        "hasMarkdown": false,
+        "color": "#4F46E5",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000,
+        "controls": [
+          { "type": "switch", "attributeId": "lingma_conversation_on", "displayName": "主动对话", "info": "切换主动对话演示状态。", "initialValue": true },
+          { "type": "slider", "attributeId": "lingma_conversation_interval", "displayName": "静默间隔", "info": "调整主动对话的演示间隔。", "initialValue": 30, "min": 10, "max": 60, "step": 10, "showInputNumber": true }
+        ]
+      },
+      {
+        "id": "device-voice-speed",
+        "index": 10,
+        "title": "接话速度",
+        "pageId": "device-basic",
+        "locator": { "selectors": ["[data-annotation-id=\"device-voice-speed\"]"], "fingerprint": "section|data-annotation-id=device-voice-speed", "path": [] },
+        "aiPrompt": "说明接话速度的演示状态和待确认行为。",
+        "annotationText": "默认开关关闭、速度第 3 档，滑杆范围 1–5。当前切换只改变前端展示状态，关闭后滑杆仍可操作；实际档位含义、生效方式和关闭后的产品规则待确认。",
+        "hasMarkdown": false,
+        "color": "#4F46E5",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000,
+        "controls": [
+          { "type": "switch", "attributeId": "lingma_speed_on", "displayName": "接话速度开关", "info": "切换接话速度的演示开关。", "initialValue": false },
+          { "type": "slider", "attributeId": "lingma_voice_speed", "displayName": "接话速度档位", "info": "调整 1–5 档演示值。", "initialValue": 3, "min": 1, "max": 5, "step": 1, "showInputNumber": true }
+        ]
+      },
+      {
+        "id": "device-volume",
+        "index": 11,
+        "title": "音量",
+        "pageId": "device-basic",
+        "locator": { "selectors": ["[data-annotation-id=\"device-volume\"]"], "fingerprint": "section|data-annotation-id=device-volume", "path": [] },
+        "aiPrompt": "说明音量档位、端点文案和重启提示。",
+        "annotationText": "默认第 3 档，范围 1–5，端点为‘哄睡’和‘响亮’，页面提示调节后需重新开机。实际音量映射和重启规则待确认。",
+        "hasMarkdown": false,
+        "color": "#4F46E5",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000,
+        "controls": [
+          { "type": "slider", "attributeId": "lingma_volume", "displayName": "音量档位", "info": "调整 1–5 档演示值。", "initialValue": 3, "min": 1, "max": 5, "step": 1, "showInputNumber": true }
+        ]
+      },
+      {
+        "id": "device-system-parameters",
+        "index": 12,
+        "title": "系统参数",
+        "pageId": "device-system",
+        "locator": { "selectors": ["[data-annotation-id=\"device-system-parameters\"]"], "fingerprint": "section|data-annotation-id=device-system-parameters", "path": [] },
+        "aiPrompt": "说明设备 ID、版本、陪伴时长和解绑入口的示例边界。",
+        "annotationText": "展示示例设备 ID、当前版本 1.1.5、陪伴时长 39 天和解除绑定入口。复制与解绑当前没有业务行为；数据保留、二次确认和失败反馈待确认。",
+        "hasMarkdown": false,
+        "color": "#D97A45",
+        "images": [],
+        "createdAt": 1791590400000,
+        "updatedAt": 1791590400000
+      }
+    ],
+    "updatedAt": 1791590400000
   },
   "markdownMap": {},
   "assetMap": {},
@@ -29,6 +215,27 @@
             "id": "route-device",
             "title": "设备管理",
             "route": "device"
+          },
+          {
+            "type": "folder",
+            "id": "directory-docs",
+            "title": "需求文档",
+            "defaultExpanded": true,
+            "children": [
+              { "type": "markdown", "id": "doc-overview", "title": "范围与依据", "markdownPath": "docs/requirements-overview.md" },
+              { "type": "markdown", "id": "doc-home", "title": "成长中心首页需求", "markdownPath": "docs/home-requirements.md" },
+              { "type": "markdown", "id": "doc-device", "title": "设备管理需求", "markdownPath": "docs/device-requirements.md" },
+              { "type": "markdown", "id": "doc-states", "title": "状态与待确认事项", "markdownPath": "docs/states-and-decisions.md" }
+            ]
+          },
+          {
+            "type": "folder",
+            "id": "directory-links",
+            "title": "外部资料",
+            "defaultExpanded": false,
+            "children": [
+              { "type": "link", "id": "link-wechat-dev", "title": "微信小程序官方文档", "href": "https://developers.weixin.qq.com/miniprogram/dev/framework/", "target": "blank" }
+            ]
           }
         ]
       }

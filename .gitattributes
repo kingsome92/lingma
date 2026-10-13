@@ -1,0 +1,17 @@
+# Keep text files stable across Windows, macOS, and Linux checkouts.
+* text=auto eol=lf
+
+# Assets and archives must remain byte-for-byte unchanged.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.pptx binary
+*.xlsx binary
+*.zip binary
+*.woff binary
+*.woff2 binary
+*.ttf binary

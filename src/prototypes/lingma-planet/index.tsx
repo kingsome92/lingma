@@ -2,7 +2,7 @@
  * @name 灵玛星球小程序
  */
 
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AnnotationViewer, setProtoDevState, useProtoDevState } from '@axhub/annotation';
 import type { AnnotationSourceDocument, AnnotationViewerOptions } from '@axhub/annotation';
 import annotationSourceDocument from './annotation-source.json';
@@ -196,6 +196,13 @@ function HomePage({ goToDevice, goToAudio }: { goToDevice: () => void; goToAudio
     const deviceMenuOpen = protoState.lingma_menu_open === true;
     const setDeviceMenuOpen = (open: boolean) => setProtoDevState({ lingma_menu_open: open });
     const deviceControlsRef = useRef<HTMLDivElement>(null);
+    const [servicePosition, setServicePosition] = useState<{ left: number; top: number } | null>(null);
+    const serviceDragRef = useRef<{
+        pointerId: number;
+        page: HTMLElement;
+        offsetX: number;
+        offsetY: number;
+    } | null>(null);
 
     useEffect(() => {
         const handleOutsidePointerDown = (event: PointerEvent) => {
@@ -206,6 +213,45 @@ function HomePage({ goToDevice, goToAudio }: { goToDevice: () => void; goToAudio
         document.addEventListener('pointerdown', handleOutsidePointerDown);
         return () => document.removeEventListener('pointerdown', handleOutsidePointerDown);
     }, []);
+
+    const handleServicePointerDown = (event: React.PointerEvent<HTMLButtonElement>) => {
+        if (event.button !== 0) return;
+        const page = event.currentTarget.closest('.lingma-home-page') as HTMLElement | null;
+        if (!page) return;
+        const pageRect = page.getBoundingClientRect();
+        const buttonRect = event.currentTarget.getBoundingClientRect();
+        serviceDragRef.current = {
+            pointerId: event.pointerId,
+            page,
+            offsetX: event.clientX - buttonRect.left,
+            offsetY: event.clientY - buttonRect.top,
+        };
+        setServicePosition({
+            left: buttonRect.left - pageRect.left,
+            top: buttonRect.top - pageRect.top,
+        });
+        event.currentTarget.setPointerCapture(event.pointerId);
+    };
+
+    const handleServicePointerMove = (event: React.PointerEvent<HTMLButtonElement>) => {
+        const drag = serviceDragRef.current;
+        if (!drag || drag.pointerId !== event.pointerId) return;
+        const pageRect = drag.page.getBoundingClientRect();
+        const button = event.currentTarget;
+        const maxLeft = Math.max(0, drag.page.clientWidth - button.offsetWidth);
+        const maxTop = Math.max(0, drag.page.clientHeight - button.offsetHeight);
+        const left = Math.min(maxLeft, Math.max(0, event.clientX - pageRect.left - drag.offsetX));
+        const top = Math.min(maxTop, Math.max(0, event.clientY - pageRect.top - drag.offsetY));
+        setServicePosition({ left, top });
+    };
+
+    const handleServicePointerEnd = (event: React.PointerEvent<HTMLButtonElement>) => {
+        if (serviceDragRef.current?.pointerId !== event.pointerId) return;
+        serviceDragRef.current = null;
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+            event.currentTarget.releasePointerCapture(event.pointerId);
+        }
+    };
 
     return (
         <main className="lingma-home-page">
@@ -255,7 +301,17 @@ function HomePage({ goToDevice, goToAudio }: { goToDevice: () => void; goToAudio
 
             <div className="lingma-home-spacer" aria-hidden="true" />
             <img className="lingma-mascot" src={referenceMascot} alt="阅读中的玩偶插画" />
-            <button className="lingma-service-button" type="button" aria-label="联系客服" data-annotation-id="home-service">
+            <button
+                className="lingma-service-button"
+                type="button"
+                aria-label="联系客服"
+                data-annotation-id="home-service"
+                style={servicePosition ? { left: servicePosition.left, top: servicePosition.top, right: 'auto' } : undefined}
+                onPointerDown={handleServicePointerDown}
+                onPointerMove={handleServicePointerMove}
+                onPointerUp={handleServicePointerEnd}
+                onPointerCancel={handleServicePointerEnd}
+            >
                 <Headphones size={30} strokeWidth={1.8} />
                 <span>客服</span>
             </button>
@@ -393,7 +449,7 @@ function AudioPage({ goHome, goAlbum }: { goHome: () => void; goAlbum: (albumId:
             </div>
             {query.trim() ? <section className="lingma-audio-section"><div className="lingma-audio-section-heading"><h3>搜索结果</h3><span>{searchTracks.length} 首</span></div>{searchTracks.length ? <div className="lingma-audio-track-list">{searchTracks.map((item) => <AudioTrackRow key={item.id} track={item} playing={playing && track.id === item.id} onPlay={() => playTrack(item)} />)}</div> : <div className="lingma-audio-empty"><Search size={30} /><strong>没有找到相关音频</strong><span>试试搜索“春天”或“贝瓦儿歌”</span></div>}</section> : <>
                 <section className="lingma-audio-section"><div className="lingma-audio-section-heading"><h3>为你推荐</h3><button type="button" onClick={() => setAudio({ lingma_audio_category: '全部' })}>查看全部 <ChevronRight size={16} /></button></div><div className="lingma-album-grid">{visibleAlbums.slice(0, 4).map((album) => <button className="lingma-album-card" key={album.id} type="button" onClick={() => goAlbum(album.id)}><AlbumCover tone={album.tone} variant={album.id} /><strong>{album.title}</strong><small>{album.category} · {album.count} 首</small></button>)}</div></section>
-                <section className="lingma-audio-section"><div className="lingma-audio-section-heading"><h3>全部专辑</h3><span>{visibleAlbums.length} 张</span></div><div className="lingma-audio-album-list">{visibleAlbums.map((album) => <button className="lingma-audio-album-row" key={album.id} type="button" onClick={() => goAlbum(album.id)}><AlbumCover tone={album.tone} variant={album.id} icon={<ListMusic size={23} />} /><span><strong>{album.title}</strong><small>{album.category} · {album.count} 首</small></span><ChevronRight size={19} /></button>)}</div></section>
+                <section className="lingma-audio-section"><div className="lingma-audio-section-heading"><h3>全部专辑</h3><span>{visibleAlbums.length} 张</span></div><div className="lingma-audio-album-list">{visibleAlbums.map((album) => <button className={`lingma-audio-album-row ${album.id === 'beiwa-selected' ? 'is-compact' : ''}`} key={album.id} type="button" onClick={() => goAlbum(album.id)}><AlbumCover tone={album.tone} variant={album.id} icon={<ListMusic size={album.id === 'beiwa-selected' ? 18 : 23} />} /><span><strong>{album.title}</strong><small>{album.category} · {album.count} 首</small></span><ChevronRight size={19} /></button>)}</div></section>
             </>}
             <audio ref={audioRef} preload="none" aria-hidden="true" />
             <AudioMiniPlayer track={track} playing={playing} onToggle={() => setAudio({ lingma_audio_playing: !playing })} onBack={() => shiftTrack(-1)} onForward={() => shiftTrack(1)} />

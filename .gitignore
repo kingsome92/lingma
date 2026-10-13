@@ -10,6 +10,7 @@ lerna-debug.log*
 dist/
 !vendor/**/dist/
 !vendor/**/dist/**
+.codex-tmp/
 *.tsbuildinfo
 
 # Large source fonts are kept outside the published client template.
